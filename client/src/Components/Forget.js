@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React from 'react'
 
 function Forget() {
@@ -23,6 +24,22 @@ function Forget() {
 					type='text'
 					name='recover'
 					placeholder='Enter Recover Text...'
+				/>
+			</div>
+			<div>
+				<input
+					style={{ margin: '0px 0px 20px 0px' }}
+					type='text'
+					name='password'
+					placeholder='New Password...'
+				/>
+			</div>
+			<div>
+				<input
+					style={{ margin: '0px 0px 20px 0px' }}
+					type='text'
+					name='conpassword'
+					placeholder='Confirm Password...'
 				/>
 			</div>
 			<div style={{ margin: '20px 0px' }}>
