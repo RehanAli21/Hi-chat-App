@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Login from './Components/Login'
 import Signup from './Components/SignUp'
 import MainApp from './Components/App'
-
+import Forget from './Components/Forget'
 class App extends Component {
 	state = {
 		theme: 'white'
@@ -39,7 +39,8 @@ class App extends Component {
 							changethemeState={this.changethemeState}
 							css={this.state.css}
 						/>
-					)}></Route>
+					)}
+				/>
 				<Route
 					path='/signup'
 					exact
@@ -49,7 +50,8 @@ class App extends Component {
 							changethemeState={this.changethemeState}
 							css={this.state.css}
 						/>
-					)}></Route>
+					)}
+				/>
 				<Route
 					path='/app'
 					exact
@@ -59,7 +61,9 @@ class App extends Component {
 							changethemeState={this.changethemeState}
 							css={this.state.css}
 						/>
-					)}></Route>
+					)}
+				/>
+				<Route path='/forget' exact component={Forget} />
 			</Router>
 		)
 	}
