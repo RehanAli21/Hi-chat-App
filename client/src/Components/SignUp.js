@@ -14,7 +14,7 @@ const SignUp = () => {
 
 	useEffect(() => {
 		changeTheme()
-	})
+	}, [theme])
 
 	const changeTheme = () => {
 		const link = document.getElementById('styles')
