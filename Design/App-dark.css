@@ -1,0 +1,208 @@
+:root {
+	--color: #007bdb;
+	--darkcolor: #212121;
+}
+
+body {
+	background-color: var(--darkcolor);
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: sans-serif;
+}
+
+nav {
+	height: 10vh;
+	display: grid;
+	grid-template-columns: 5% 1fr 1fr 2fr 1fr 1fr 5%;
+	text-align: center;
+	align-content: center;
+	background-color: var(--color);
+	color: white;
+}
+
+nav h1 {
+	font-size: 2.5em;
+}
+
+.nameHeading {
+	grid-column: 2/3;
+	padding-top: 10px;
+}
+
+.mainHeading {
+	grid-column: 4/5;
+}
+
+main {
+	height: 90vh;
+	display: grid;
+	grid-template-columns: 1.2fr 2.5fr;
+}
+
+.contacts {
+	border-right: 1px solid var(--color);
+	width: 100%;
+	max-height: 90vh;
+}
+
+.findFriends {
+	width: 100%;
+	text-align: center;
+	padding: 20px 0px;
+	border-bottom: 1px solid var(--color);
+}
+
+.contact {
+	overflow: hidden;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+	padding: 15px 0px;
+}
+
+.contact img {
+	width: 60%;
+	height: 90%;
+	margin: auto;
+	border-radius: 100%;
+	border: 1px solid var(--color);
+}
+
+.contactDetails {
+	border-bottom: 1px solid var(--color);
+}
+.contactDetails h3,
+.contactDetails p {
+	padding: 5px 0px 10px 10px;
+	align-self: center;
+	color: white;
+}
+
+.contactDetails p {
+	color: gray;
+}
+
+.contactActivated {
+	background-color: var(--color);
+	color: white;
+}
+.contactActivated p {
+	color: white;
+}
+.contactActivated .contactDetails {
+	border-bottom: 1px solid White;
+}
+
+.msgs {
+	display: grid;
+	grid-template-rows: 6fr 1fr;
+}
+
+.input-section {
+	text-align: center;
+	padding-top: 15px;
+	border-top: 2px solid var(--color);
+}
+
+.input-section input {
+	width: 75%;
+	margin-right: 10px;
+}
+.input-section button {
+	width: 10%;
+	background-color: var(--darkcolor);
+	border: 2px solid var(--color);
+}
+.input-section button:active {
+	width: 10%;
+	background-color: var(--color);
+	color: white;
+}
+
+.msg-section {
+	display: flex;
+	flex-direction: column-reverse;
+	align-content: flex-start;
+}
+
+.msg-section > .right {
+	display: flex;
+	flex-direction: row-reverse;
+	padding: 10px 20px;
+}
+
+.msg-section > .left {
+	display: flex;
+	flex-direction: row;
+	padding: 10px 20px;
+}
+
+.mymsg {
+	background-color: var(--darkcolor);
+	padding: 30px;
+	box-shadow: -2px 2px 5px var(--color);
+	color: white;
+	max-width: 50%;
+	text-align: center;
+	border: 2px solid var(--color);
+}
+
+.notmymsg {
+	background-color: var(--darkcolor);
+	padding: 30px;
+	border: 2px solid white;
+	box-shadow: 2px 2px 5px white;
+	max-width: 50%;
+	text-align: center;
+	color: white;
+}
+
+.btn {
+	padding: 15px;
+	font-size: 1em;
+	font-weight: bold;
+	border-radius: 10px;
+	outline: none;
+}
+
+.btn-theme {
+	color: var(--color);
+	background-color: white;
+	border: none;
+}
+.btn-theme:active {
+	background-color: var(--color);
+	color: white;
+	border: 1px solid white;
+}
+
+.btn-primary {
+	color: white;
+	border: 1px solid var(--darkcolor);
+	background-color: var(--color);
+}
+
+.btn-primary:active {
+	background-color: var(--darkcolor);
+	color: var(--color);
+}
+
+input {
+	padding: 15px;
+	width: 80%;
+	border: 1px solid var(--color);
+	border-bottom: 2px solid var(--color);
+	outline: none;
+	border-radius: 5px;
+	font-size: 1em;
+	background-color: var(--darkcolor);
+}
+
+input:focus {
+	border: 1px solid var(--color);
+	border-bottom: 3px solid var(--color);
+}
