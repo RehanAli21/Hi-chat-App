@@ -6,8 +6,7 @@ import MainApp from './Components/App'
 
 class App extends Component {
 	state = {
-		theme: 'white',
-		css: 'a'
+		theme: 'white'
 	}
 
 	componentDidMount() {
@@ -17,7 +16,7 @@ class App extends Component {
 
 	changeTheme = () => {
 		const link = document.getElementById('styles')
-		if (this.state.theme === 'white') link.href = 'SignIn.css'
+		if (this.state.theme === 'dark') link.href = 'SignIn.css'
 		else link.href = 'SignIn-dark.css'
 	}
 
