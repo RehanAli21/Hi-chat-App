@@ -1,7 +1,35 @@
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
-import React from 'react'
 
-function Forget() {
+const Forget = () => {
+	const [username, setUsername] = useState('')
+	const [recover, setRecover] = useState('')
+	const [password, setPassword] = useState('')
+	const [conpassword, setConpassword] = useState('')
+
+	let history = useHistory()
+
+	const recoverPassword = () => {
+		if (!username && !recover && !password && !conpassword)
+			return alert('No Filed must Empty!')
+
+		if (!password && !conpassword)
+			return alert('Password and confirm password is not same!')
+
+		axios
+			.put('http://localhost:5000/user/forget', {
+				username,
+				recover,
+				password
+			})
+			.then(res => {
+				alert(res.data.msg)
+				history.push('/')
+			})
+			.catch(err => console.log(err))
+	}
+
 	return (
 		<div
 			style={{
@@ -16,6 +44,7 @@ function Forget() {
 					type='text'
 					name='username'
 					placeholder='Enter Username...'
+					onChange={e => setUsername(e.target.value)}
 				/>
 			</div>
 			<div>
@@ -24,6 +53,7 @@ function Forget() {
 					type='text'
 					name='recover'
 					placeholder='Enter Recover Text...'
+					onChange={e => setRecover(e.target.value)}
 				/>
 			</div>
 			<div>
@@ -32,6 +62,7 @@ function Forget() {
 					type='text'
 					name='password'
 					placeholder='New Password...'
+					onChange={e => setPassword(e.target.value)}
 				/>
 			</div>
 			<div>
@@ -40,10 +71,13 @@ function Forget() {
 					type='text'
 					name='conpassword'
 					placeholder='Confirm Password...'
+					onChange={e => setConpassword(e.target.value)}
 				/>
 			</div>
 			<div style={{ margin: '20px 0px' }}>
-				<button class='btn btn-primary'>Forget Password</button>
+				<button className='btn btn-primary' onClick={recoverPassword}>
+					Forget Password
+				</button>
 			</div>
 		</div>
 	)
