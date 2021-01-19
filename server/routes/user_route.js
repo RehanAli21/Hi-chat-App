@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const UserModel = require('../model/UserModel')
 const Joi = require('joi')
-const { Model } = require('mongoose')
 
 router.get('/:username/:password', async (req, res) => {
 	try {
@@ -20,7 +19,6 @@ router.get('/:username/:password', async (req, res) => {
 })
 
 router.put('/forget', async (req, res) => {
-	console.log(req.body)
 	try {
 		const user = await UserModel.findOneAndUpdate(
 			{
@@ -29,7 +27,7 @@ router.put('/forget', async (req, res) => {
 			},
 			{ password: req.body.password }
 		)
-		if (!user) return res.status(400).send('Username is incorrect')
+		if (!user) return res.status(400).send({ msg: 'Username is incorrect' })
 
 		res.status(200).send({ msg: 'Password Updated' })
 	} catch (error) {}
