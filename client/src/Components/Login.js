@@ -2,27 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
-const Login = () => {
-	const [theme, setTheme] = useState('white')
+const Login = ({ theme, changethemeState }) => {
 	let [username, setUsername] = useState('')
 	let [password, setPassword] = useState('')
 
 	let history = useHistory()
-
-	useEffect(() => {
-		changeTheme()
-	})
-
-	const changeTheme = () => {
-		const link = document.getElementById('styles')
-		if (theme === 'white') link.href = 'SignIn.css'
-		else link.href = 'SignIn-dark.css'
-	}
-
-	const changethemeState = () => {
-		setTheme(theme === 'dark' ? 'white' : 'dark')
-		changeTheme(theme === 'white' ? 'dark' : 'white')
-	}
 
 	const onLogin = () => {
 		if (!username && !password) return

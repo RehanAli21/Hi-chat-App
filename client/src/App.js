@@ -5,14 +5,62 @@ import Signup from './Components/SignUp'
 import MainApp from './Components/App'
 
 class App extends Component {
-	state = {}
+	state = {
+		theme: 'white',
+		css: 'a'
+	}
+
+	componentDidMount() {
+		this.changethemeState()
+		this.changeTheme()
+	}
+
+	changeTheme = () => {
+		const link = document.getElementById('styles')
+		if (this.state.theme === 'white') link.href = 'SignIn.css'
+		else link.href = 'SignIn-dark.css'
+	}
+
+	changethemeState = () => {
+		this.setState(state => ({
+			theme: this.state.theme === 'dark' ? 'white' : 'dark'
+		}))
+		this.changeTheme(this.state.theme === 'white' ? 'dark' : 'white')
+	}
 
 	render() {
 		return (
 			<Router>
-				<Route path='/' exact component={Login}></Route>
-				<Route path='/signup' exact component={Signup}></Route>
-				<Route path='/app' exact component={MainApp}></Route>
+				<Route
+					path='/'
+					exact
+					render={() => (
+						<Login
+							theme={this.state.theme}
+							changethemeState={this.changethemeState}
+							css={this.state.css}
+						/>
+					)}></Route>
+				<Route
+					path='/signup'
+					exact
+					render={() => (
+						<Signup
+							theme={this.state.theme}
+							changethemeState={this.changethemeState}
+							css={this.state.css}
+						/>
+					)}></Route>
+				<Route
+					path='/app'
+					exact
+					render={() => (
+						<MainApp
+							theme={this.state.theme}
+							changethemeState={this.changethemeState}
+							css={this.state.css}
+						/>
+					)}></Route>
 			</Router>
 		)
 	}

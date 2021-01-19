@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
-const SignUp = () => {
-	let [theme, setTheme] = useState('white')
+const SignUp = ({ theme, changethemeState }) => {
 	let [name, setName] = useState('')
 	let [username, setUsername] = useState('')
 	let [password, setPassword] = useState('')
@@ -12,26 +11,12 @@ const SignUp = () => {
 
 	let history = useHistory()
 
-	useEffect(() => {
-		changeTheme()
-	}, [theme])
-
-	const changeTheme = () => {
-		const link = document.getElementById('styles')
-		if (theme === 'white') link.href = 'SignIn.css'
-		else link.href = 'SignIn-dark.css'
-	}
-
-	const changethemeState = () => {
-		setTheme(theme === 'dark' ? 'white' : 'dark')
-		changeTheme(theme === 'white' ? 'dark' : 'white')
-	}
-
 	const onSignUp = () => {
 		if (!name && !username && !password && !conPassword && !recover)
-			return console.log('empty')
+			return alert('No filed must be empty')
 
-		if (password !== conPassword) return console.log('not same')
+		if (password !== conPassword)
+			return alert('password and confirm passsword is not same')
 
 		axios
 			.post('http://localhost:5000/user', {
