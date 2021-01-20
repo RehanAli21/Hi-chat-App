@@ -19,10 +19,6 @@ const App = () => {
 	const changethemeState = () => {
 		setTheme(theme === 'dark' ? 'white' : 'dark')
 		changeTheme()
-		// this.setState(state => ({
-		// 	theme: this.state.theme === 'dark' ? 'white' : 'dark'
-		// }))
-		// this.changeTheme(this.state.theme === 'white' ? 'dark' : 'white')
 	}
 
 	return (

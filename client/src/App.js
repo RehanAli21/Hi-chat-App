@@ -4,9 +4,18 @@ import Login from './Components/Login'
 import Signup from './Components/SignUp'
 import MainApp from './Components/App'
 import Forget from './Components/Forget'
+
 class App extends Component {
 	state = {
-		theme: 'white'
+		theme: 'white',
+		// This is username and id which will be come from backend
+		// and will be used in app
+		u: '',
+		id: ''
+	}
+
+	setUAndId = (username, _id) => {
+		this.setState(prevstate => ({ ...prevstate, u: username, id: _id }))
 	}
 
 	componentDidMount() {
@@ -37,18 +46,9 @@ class App extends Component {
 						<Login
 							theme={this.state.theme}
 							changethemeState={this.changethemeState}
-							css={this.state.css}
-						/>
-					)}
-				/>
-				<Route
-					path='/signup'
-					exact
-					render={() => (
-						<Signup
-							theme={this.state.theme}
-							changethemeState={this.changethemeState}
-							css={this.state.css}
+							u={this.state.u}
+							id={this.state.id}
+							setUAndId={this.setUAndId}
 						/>
 					)}
 				/>
@@ -59,7 +59,19 @@ class App extends Component {
 						<MainApp
 							theme={this.state.theme}
 							changethemeState={this.changethemeState}
-							css={this.state.css}
+							u={this.state.u}
+							id={this.state.id}
+							setUAndId={this.setUAndId}
+						/>
+					)}
+				/>
+				<Route
+					path='/signup'
+					exact
+					render={() => (
+						<Signup
+							theme={this.state.theme}
+							changethemeState={this.changethemeState}
 						/>
 					)}
 				/>

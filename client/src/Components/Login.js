@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
-const Login = ({ theme, changethemeState }) => {
+const Login = ({ u, id, setUAndId, theme, changethemeState }) => {
 	let [username, setUsername] = useState('')
 	let [password, setPassword] = useState('')
-
 	let history = useHistory()
 
 	const onLogin = () => {
@@ -14,8 +13,10 @@ const Login = ({ theme, changethemeState }) => {
 		axios
 			.get(`http://localhost:5000/user/${username}/${password}`)
 			.then(res => {
-				console.log(res)
+				console.log(u, id)
 				if (res.status === 200) {
+					setUAndId(res.data.username, res.data.id)
+					console.log(u, id)
 					history.push('/app')
 				}
 			})
