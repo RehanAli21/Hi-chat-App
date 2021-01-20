@@ -111,6 +111,7 @@ main {
 .input-section input {
 	width: 75%;
 	margin-right: 10px;
+	color: white;
 }
 .input-section button {
 	width: 10%;
@@ -200,6 +201,7 @@ input {
 	border-radius: 5px;
 	font-size: 1em;
 	background-color: var(--darkcolor);
+	color: white;
 }
 
 input:focus {

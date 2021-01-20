@@ -42,18 +42,14 @@ class App extends Component {
 						<Login
 							theme={this.state.theme}
 							changethemeState={this.changethemeState}
+							changeTheme={this.changeTheme}
 						/>
 					)}
 				/>
 				<Route
 					path='/app'
 					exact
-					render={() => (
-						<MainApp
-							theme={this.state.theme}
-							changethemeState={this.changethemeState}
-						/>
-					)}
+					render={() => <MainApp t={this.state.theme} />}
 				/>
 				<Route
 					path='/signup'

@@ -1,11 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
-const Login = ({ theme, changethemeState }) => {
+const Login = ({ theme, changethemeState, changeTheme }) => {
 	let [username, setUsername] = useState('')
 	let [password, setPassword] = useState('')
 	let history = useHistory()
+
+	useEffect(() => {
+		changethemeState()
+	}, [])
 
 	const onLogin = () => {
 		if (!username && !password) return

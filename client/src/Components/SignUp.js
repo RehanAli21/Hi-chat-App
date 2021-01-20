@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
-const SignUp = ({ theme, changethemeState }) => {
+const SignUp = ({ theme, changethemeState, changeTheme }) => {
 	let [name, setName] = useState('')
 	let [username, setUsername] = useState('')
 	let [password, setPassword] = useState('')
@@ -10,6 +10,10 @@ const SignUp = ({ theme, changethemeState }) => {
 	let [recover, setRecover] = useState('')
 
 	let history = useHistory()
+
+	useEffect(() => {
+		changethemeState()
+	}, [])
 
 	const onSignUp = () => {
 		if (!name && !username && !password && !conPassword && !recover)
@@ -90,7 +94,7 @@ const SignUp = ({ theme, changethemeState }) => {
 					onClick={onSignUp}>
 					SignUp
 				</button>
-				<div class='links'>
+				<div className='links'>
 					<Link to='/' className='blue'>
 						<p>Sign In</p>
 					</Link>

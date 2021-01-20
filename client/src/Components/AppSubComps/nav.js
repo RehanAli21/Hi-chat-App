@@ -1,6 +1,6 @@
 import React from 'react'
 
-const nav = ({ name, theme, changeTheme }) => {
+const nav = ({ name, theme, changeTheme, onSignOut }) => {
 	return (
 		<nav>
 			<div className='nameHeading'>
@@ -15,7 +15,9 @@ const nav = ({ name, theme, changeTheme }) => {
 				</button>
 			</div>
 			<div className='signoutBtn'>
-				<button className='btn btn-primary'>SignOut</button>
+				<button onClick={onSignOut} className='btn btn-primary'>
+					SignOut
+				</button>
 			</div>
 		</nav>
 	)

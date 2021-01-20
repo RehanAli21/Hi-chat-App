@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from 'react'
-import Nav from './AppSubComps/nav'
+import { useHistory } from 'react-router-dom'
+import Nav from './AppSubComps/Nav'
 import Contacts from './AppSubComps/Contacts'
 import Msgs from './AppSubComps/Msgs'
 
-const App = () => {
-	const [theme, setTheme] = useState('white')
+const App = ({ t }) => {
+	const [theme, setTheme] = useState(t)
 	const [id, setId] = useState('')
 	const [username, setUsername] = useState('')
+	const history = useHistory()
 
 	useEffect(() => {
-		changeTheme()
+		changethemeState()
 		setId(window.localStorage.getItem('id'))
 		setUsername(window.localStorage.getItem('username'))
-	})
+	}, [])
+
+	const onSignOut = () => {
+		window.localStorage.setItem('id', '')
+		window.localStorage.setItem('username', '')
+		history.push('/')
+	}
 
 	const changeTheme = () => {
 		const link = document.getElementById('styles')
@@ -29,8 +37,9 @@ const App = () => {
 		<div>
 			<Nav
 				name={'Rehan Ali'}
-				theme={theme === 'white' ? 'dark' : 'white'}
+				theme={theme === 'dark' ? 'dark' : 'white'}
 				changeTheme={changethemeState}
+				onSignOut={onSignOut}
 			/>
 			<main>
 				<Contacts />
