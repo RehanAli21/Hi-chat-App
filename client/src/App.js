@@ -7,11 +7,7 @@ import Forget from './Components/Forget'
 
 class App extends Component {
 	state = {
-		theme: 'white',
-		// This is username and id which will be come from backend
-		// and will be used in app
-		u: '',
-		id: ''
+		theme: 'white'
 	}
 
 	setUAndId = (username, _id) => {
@@ -46,9 +42,6 @@ class App extends Component {
 						<Login
 							theme={this.state.theme}
 							changethemeState={this.changethemeState}
-							u={this.state.u}
-							id={this.state.id}
-							setUAndId={this.setUAndId}
 						/>
 					)}
 				/>
@@ -59,9 +52,6 @@ class App extends Component {
 						<MainApp
 							theme={this.state.theme}
 							changethemeState={this.changethemeState}
-							u={this.state.u}
-							id={this.state.id}
-							setUAndId={this.setUAndId}
 						/>
 					)}
 				/>

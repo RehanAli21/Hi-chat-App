@@ -4,10 +4,14 @@ import Contacts from './AppSubComps/Contacts'
 import Msgs from './AppSubComps/Msgs'
 
 const App = () => {
-	let [theme, setTheme] = useState('white')
+	const [theme, setTheme] = useState('white')
+	const [id, setId] = useState('')
+	const [username, setUsername] = useState('')
 
 	useEffect(() => {
 		changeTheme()
+		setId(window.localStorage.getItem('id'))
+		setUsername(window.localStorage.getItem('username'))
 	})
 
 	const changeTheme = () => {

@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
-const Login = ({ u, id, setUAndId, theme, changethemeState }) => {
+const Login = ({ theme, changethemeState }) => {
 	let [username, setUsername] = useState('')
 	let [password, setPassword] = useState('')
 	let history = useHistory()
@@ -13,10 +13,10 @@ const Login = ({ u, id, setUAndId, theme, changethemeState }) => {
 		axios
 			.get(`http://localhost:5000/user/${username}/${password}`)
 			.then(res => {
-				console.log(u, id)
 				if (res.status === 200) {
-					setUAndId(res.data.username, res.data.id)
-					console.log(u, id)
+					//setUAndId(res.data.username, res.data.id)
+					window.localStorage.setItem('username', res.data.username)
+					window.localStorage.setItem('id', res.data.id)
 					history.push('/app')
 				}
 			})
