@@ -18,7 +18,6 @@ const Login = ({ theme, changethemeState, changeTheme }) => {
 			.get(`http://localhost:5000/user/${username}/${password}`)
 			.then(res => {
 				if (res.status === 200) {
-					//setUAndId(res.data.username, res.data.id)
 					window.localStorage.setItem('username', res.data.username)
 					window.localStorage.setItem('id', res.data.id)
 					history.push('/app')

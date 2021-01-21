@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import io from 'socket.io-client'
 import Nav from './AppSubComps/Nav'
 import Contacts from './AppSubComps/Contacts'
 import Msgs from './AppSubComps/Msgs'
+
+let socket
 
 const App = ({ t }) => {
 	const [theme, setTheme] = useState(t)
 	const [id, setId] = useState('')
 	const [username, setUsername] = useState('')
+	const ENDPOINT = 'http://localhost:5000/'
 	const history = useHistory()
 
 	useEffect(() => {
@@ -15,6 +19,11 @@ const App = ({ t }) => {
 		setId(window.localStorage.getItem('id'))
 		setUsername(window.localStorage.getItem('username'))
 	}, [])
+
+	useEffect(() => {
+		socket = io(ENDPOINT)
+		console.log(socket)
+	})
 
 	const onSignOut = () => {
 		window.localStorage.setItem('id', '')
