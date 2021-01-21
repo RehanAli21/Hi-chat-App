@@ -8,7 +8,7 @@ const Login = ({ theme, changethemeState, changeTheme }) => {
 	let history = useHistory()
 
 	useEffect(() => {
-		changethemeState()
+		changeTheme()
 	}, [])
 
 	const onLogin = () => {

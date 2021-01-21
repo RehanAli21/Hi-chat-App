@@ -12,7 +12,7 @@ const SignUp = ({ theme, changethemeState, changeTheme }) => {
 	let history = useHistory()
 
 	useEffect(() => {
-		changethemeState()
+		changeTheme()
 	}, [])
 
 	const onSignUp = () => {
