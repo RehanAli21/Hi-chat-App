@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
-const Nav = ({ name, t }) => {
+const Nav = ({ t }) => {
 	const [theme, setTheme] = useState(t)
+	const name = window.localStorage.getItem('name')
 	const history = useHistory()
 
 	useEffect(() => {
@@ -29,7 +30,7 @@ const Nav = ({ name, t }) => {
 	return (
 		<nav>
 			<div className='nameHeading'>
-				<h2>{name}</h2>
+				<h2>{name.toUpperCase()}</h2>
 			</div>
 			<div className='mainHeading'>
 				<h1>Hi</h1>

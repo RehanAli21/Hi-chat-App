@@ -20,6 +20,7 @@ const Login = ({ theme, changethemeState, changeTheme }) => {
 				if (res.status === 200) {
 					window.localStorage.setItem('username', res.data.username)
 					window.localStorage.setItem('id', res.data.id)
+					window.localStorage.setItem('name', res.data.name)
 					history.push('/app')
 				}
 			})

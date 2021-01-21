@@ -27,7 +27,7 @@ const App = ({ theme }) => {
 
 	return (
 		<div>
-			<Nav name={'Rehan Ali'} t={theme} />
+			<Nav t={theme} />
 			<main>
 				<Contacts />
 				<Msgs />

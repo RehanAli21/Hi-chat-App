@@ -12,7 +12,11 @@ router.get('/:username/:password', async (req, res) => {
 			res.status(400).send('Username or Password is incorrect')
 			return
 		}
-		res.status(200).send({ id: user._id, username: user.username })
+		res.status(200).send({
+			id: user._id,
+			name: user.name,
+			username: user.username
+		})
 	} catch (err) {
 		res.status(400).send(err)
 	}
