@@ -22,8 +22,14 @@ const App = ({ t }) => {
 
 	useEffect(() => {
 		socket = io(ENDPOINT)
-		console.log(socket)
-	})
+
+		socket.emit('join', { username: username, room: username })
+
+		return () => {
+			socket.emit('disconnect')
+			socket.off()
+		}
+	}, [ENDPOINT])
 
 	const onSignOut = () => {
 		window.localStorage.setItem('id', '')
