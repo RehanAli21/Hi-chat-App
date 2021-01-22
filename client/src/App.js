@@ -14,22 +14,15 @@ class App extends Component {
 		this.setState(prevstate => ({ ...prevstate, u: username, id: _id }))
 	}
 
-	componentDidMount() {
-		this.changethemeState()
-		this.changeTheme()
-	}
-
 	changeTheme = () => {
 		const link = document.getElementById('styles')
-		if (this.state.theme === 'dark') link.href = 'SignIn.css'
-		else link.href = 'SignIn-dark.css'
-	}
-
-	changethemeState = () => {
-		this.setState(state => ({
-			theme: this.state.theme === 'dark' ? 'white' : 'dark'
-		}))
-		this.changeTheme(this.state.theme === 'white' ? 'dark' : 'white')
+		if (this.state.theme === 'white') {
+			link.href = 'SignIn-dark.css'
+			this.setState(() => ({ theme: 'dark' }))
+		} else if (this.state.theme === 'dark') {
+			link.href = 'SignIn.css'
+			this.setState(() => ({ theme: 'white' }))
+		}
 	}
 
 	render() {
@@ -38,13 +31,7 @@ class App extends Component {
 				<Route
 					path='/'
 					exact
-					render={() => (
-						<Login
-							theme={this.state.theme}
-							changethemeState={this.changethemeState}
-							changeTheme={this.changeTheme}
-						/>
-					)}
+					render={() => <Login changeTheme={this.changeTheme} />}
 				/>
 				<Route
 					path='/app'
@@ -54,13 +41,7 @@ class App extends Component {
 				<Route
 					path='/signup'
 					exact
-					render={() => (
-						<Signup
-							theme={this.state.theme}
-							changethemeState={this.changethemeState}
-							changeTheme={this.changeTheme}
-						/>
-					)}
+					render={() => <Signup changeTheme={this.changeTheme} />}
 				/>
 				<Route path='/forget' exact component={Forget} />
 			</Router>

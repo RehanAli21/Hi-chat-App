@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
-const Login = ({ theme, changethemeState, changeTheme }) => {
+const Login = ({ changeTheme }) => {
 	let [username, setUsername] = useState('')
 	let [password, setPassword] = useState('')
 	let history = useHistory()
-
-	useEffect(() => {
-		changeTheme()
-	}, [])
 
 	const onLogin = () => {
 		if (!username && !password) return
@@ -29,8 +25,8 @@ const Login = ({ theme, changethemeState, changeTheme }) => {
 
 	return (
 		<div className='container'>
-			<button onClick={changethemeState} className='btn btn-theme'>
-				{theme === 'white' ? 'dark' : 'white'}
+			<button onClick={changeTheme} className='btn btn-theme'>
+				Theme
 			</button>
 			<div className='innerContainer'>
 				<h1 className='heading'>Hi</h1>
