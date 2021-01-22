@@ -6,15 +6,15 @@ const Request = ({ req, changeReq }) => {
 			<div className='two'>
 				<div>
 					<button onClick={changeReq} className='btn btn-primary'>
-						X
+						Close
 					</button>
 				</div>
 				<h1>Requests</h1>
 				<div className='peoples'>
 					<div className='req'>
 						<h2>Rehan</h2>
-						<button className='btn btn-primary'>Add</button>
-						<button className='btn btn-primary'>Remove</button>
+						<h2 className='req-btn'>Add</h2>
+						<h2 className='req-btn'>Remove</h2>
 					</div>
 				</div>
 			</div>

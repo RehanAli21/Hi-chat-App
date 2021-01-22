@@ -6,7 +6,7 @@ const FindFriend = ({ ff, changeFind }) => {
 			<div className='one'>
 				<div>
 					<button onClick={changeFind} className='btn btn-primary'>
-						X
+						Close
 					</button>
 				</div>
 				<input
@@ -21,19 +21,19 @@ const FindFriend = ({ ff, changeFind }) => {
 						<div>
 							<h2>username</h2>
 						</div>
-						<button className='btn btn-primary'>Add</button>
+						<h2 className='req-btn'>Add</h2>
 					</div>
 					<div className='people'>
 						<div>
 							<h2>username</h2>
 						</div>
-						<button className='btn btn-primary'>Add</button>
+						<h2 className='req-btn'>Add</h2>
 					</div>
 					<div className='people'>
 						<div>
 							<h2>username</h2>
 						</div>
-						<button className='btn btn-primary'>Add</button>
+						<h2 className='req-btn'>Add</h2>
 					</div>
 				</div>
 			</div>

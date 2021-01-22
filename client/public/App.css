@@ -29,6 +29,15 @@ nav h1 {
 	padding-top: 10px;
 }
 
+.nav-h2 {
+	padding: 10px 0px;
+	transition-duration: 0.2s;
+}
+.nav-h2:hover {
+	cursor: pointer;
+	transform: scale(1.1);
+}
+
 .mainHeading {
 	grid-column: 4/5;
 }
@@ -56,13 +65,13 @@ main {
 	position: absolute;
 	height: 75vh;
 	width: 90vw;
-	background-color: var(--darkcolor);
+	background-color: white;
 	border: 2px solid var(--color);
 	border-radius: 10px;
 	margin: 0px;
 	padding: 20px;
 	margin-left: 5vw;
-	color: white;
+	color: var(--darkcolor);
 }
 
 .ffd .one div,
@@ -74,9 +83,20 @@ main {
 .req {
 	width: 80%;
 	border: 2px solid var(--color);
-	border-radius: 15px;
 	display: grid;
 	grid-template-columns: 2fr 1fr 1fr;
+	color: var(--darkcolor);
+}
+
+.req-btn {
+	border-left: 1px solid white;
+	background-color: #0f7fff;
+	color: white;
+	padding-bottom: 10px;
+}
+.req-btn:hover {
+	cursor: pointer;
+	background-color: var(--color);
 	color: white;
 }
 
@@ -94,35 +114,25 @@ main {
 .people {
 	width: 80%;
 	border: 2px solid var(--color);
-	border-radius: 15px;
 	display: grid;
 	grid-template-columns: 3fr 1fr;
-	color: white;
 }
 
 .ffd h2 {
 	text-align: center;
-	padding: 5px 0px;
+	padding-top: 10px;
 }
 
 .contact {
 	overflow: hidden;
 	width: 100%;
-	display: grid;
-	grid-template-columns: 1fr 3fr;
 	padding: 15px 0px;
 }
 
-.contact img {
-	width: 60%;
-	height: 90%;
-	margin: auto;
-	border-radius: 100%;
-	border: 1px solid var(--color);
-}
-
 .contactDetails {
+	width: 90%;
 	border-bottom: 1px solid var(--color);
+	margin-left: 5%;
 }
 .contactDetails h3,
 .contactDetails p {
@@ -132,6 +142,7 @@ main {
 
 .contactDetails p {
 	color: gray;
+	margin-left: 10px;
 }
 
 .contactActivated {

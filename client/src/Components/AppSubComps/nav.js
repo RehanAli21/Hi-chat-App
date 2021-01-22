@@ -36,14 +36,17 @@ const Nav = ({ t }) => {
 				<h1>Hi</h1>
 			</div>
 			<div className='themeBtn'>
-				<button onClick={changeTheme} className='btn btn-theme'>
+				<h2
+					style={{ color: theme === 'dark' ? 'white' : 'black' }}
+					className='nav-h2'
+					onClick={changeTheme}>
 					{theme === 'dark' ? 'white' : 'dark'}
-				</button>
+				</h2>
 			</div>
-			<div className='signoutBtn'>
-				<button onClick={onSignOut} className='btn btn-primary'>
-					SignOut
-				</button>
+			<div>
+				<h2 className='nav-h2' onClick={onSignOut}>
+					LOGOUT
+				</h2>
 			</div>
 		</nav>
 	)
