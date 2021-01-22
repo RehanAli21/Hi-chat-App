@@ -45,7 +45,7 @@ nav h1 {
 main {
 	height: 90vh;
 	display: grid;
-	grid-template-columns: 1.2fr 2.5fr;
+	grid-template-columns: 1fr 2.5fr;
 }
 
 .contacts {
@@ -61,16 +61,20 @@ main {
 	border-bottom: 1px solid var(--color);
 }
 
+.findFriends button {
+	margin: auto 10px;
+}
+
 .ffd {
 	position: absolute;
 	height: 75vh;
-	width: 90vw;
+	width: 50%;
 	background-color: white;
 	border: 2px solid var(--color);
 	border-radius: 10px;
 	margin: 0px;
 	padding: 20px;
-	margin-left: 5vw;
+	margin-left: 25%;
 	color: var(--darkcolor);
 }
 
@@ -81,11 +85,12 @@ main {
 }
 
 .req {
-	width: 80%;
+	width: 100%;
 	border: 2px solid var(--color);
 	display: grid;
 	grid-template-columns: 2fr 1fr 1fr;
 	color: var(--darkcolor);
+	transform: scale(0.75);
 }
 
 .req-btn {
@@ -116,6 +121,7 @@ main {
 	border: 2px solid var(--color);
 	display: grid;
 	grid-template-columns: 3fr 1fr;
+	transform: scale(0.75);
 }
 
 .ffd h2 {
@@ -173,6 +179,7 @@ main {
 }
 .input-section button {
 	width: 10%;
+	border-radius: 5px;
 }
 
 .msg-section {
@@ -211,23 +218,11 @@ main {
 }
 
 .btn {
-	padding: 15px;
+	padding: 12px;
 	font-size: 1em;
 	font-weight: bold;
 	border-radius: 10px;
 	outline: none;
-}
-
-.btn-theme {
-	color: white;
-	border: 1px solid var(--darkcolor);
-	background-color: var(--darkcolor);
-}
-
-.btn-theme:active {
-	background-color: var(--color);
-	color: white;
-	border: 1px solid White;
 }
 
 .btn-primary {
@@ -242,7 +237,7 @@ main {
 }
 
 input {
-	padding: 15px;
+	padding: 10px 15px;
 	width: 80%;
 	border: none;
 	border-bottom: 2px solid var(--color);

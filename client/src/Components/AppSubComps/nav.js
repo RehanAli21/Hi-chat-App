@@ -40,7 +40,7 @@ const Nav = ({ t }) => {
 					style={{ color: theme === 'dark' ? 'white' : 'black' }}
 					className='nav-h2'
 					onClick={changeTheme}>
-					{theme === 'dark' ? 'white' : 'dark'}
+					Theme
 				</h2>
 			</div>
 			<div>
