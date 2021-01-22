@@ -20,15 +20,54 @@
 		<main>
 			<div class="contacts">
 				<div class="findFriends">
-					<input
-						type="text"
-						name="findFriend"
-						id="findFriend"
-						placeholder="Find Friend"
-					/>
+					<button class="btn btn-primary">Requests</button>
+					<button class="btn btn-primary">Find Friends</button>
+					<div class="ffd">
+						<div class="one" style="display: none">
+							<div>
+								<button class="btn btn-primary">X</button>
+							</div>
+							<input
+								type="text"
+								name="username"
+								id="usename"
+								placeholder="Enter Name"
+							/>
+							<button class="btn btn-primary">Find</button>
+							<div class="peoples">
+								<div class="people">
+									<div><h2>username</h2></div>
+									<button class="btn btn-primary">Add</button>
+								</div>
+								<div class="people">
+									<div><h2>username</h2></div>
+									<button class="btn btn-primary">Add</button>
+								</div>
+								<div class="people">
+									<div><h2>username</h2></div>
+									<button class="btn btn-primary">Add</button>
+								</div>
+							</div>
+						</div>
+						<div class="two">
+							<div>
+								<button class="btn btn-primary">X</button>
+							</div>
+							<h1>Requests</h1>
+							<div class="peoples">
+								<div class="req">
+									<h2>Rehan</h2>
+									<button class="btn btn-primary">Add</button>
+									<button class="btn btn-primary">
+										Remove
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="contactSection">
-					<div class="contact contactActivated">
+					<div class="contact">
 						<img src="dp-dark.png" alt="dp" />
 						<div class="contactDetails">
 							<h3>Ali</h3>

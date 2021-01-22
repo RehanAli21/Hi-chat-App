@@ -56,6 +56,59 @@ main {
 	border-bottom: 1px solid var(--color);
 }
 
+.ffd {
+	position: absolute;
+	height: 75vh;
+	width: 90vw;
+	background-color: var(--darkcolor);
+	border: 2px solid var(--color);
+	border-radius: 10px;
+	margin: 0px;
+	padding: 20px;
+	margin-left: 5vw;
+	color: white;
+}
+
+.ffd .one div,
+.ffd .two div {
+	text-align: right;
+	margin-bottom: 10px;
+}
+
+.req {
+	width: 80%;
+	border: 2px solid var(--color);
+	border-radius: 15px;
+	display: grid;
+	grid-template-columns: 2fr 1fr 1fr;
+	color: white;
+}
+
+.ffd input {
+	color: white;
+}
+
+.peoples {
+	width: 80%;
+	margin-left: 10%;
+	margin-top: 20px;
+	height: 70%;
+}
+
+.people {
+	width: 80%;
+	border: 2px solid var(--color);
+	border-radius: 15px;
+	display: grid;
+	grid-template-columns: 3fr 1fr;
+	color: white;
+}
+
+.ffd h2 {
+	text-align: center;
+	padding: 5px 0px;
+}
+
 .contact {
 	overflow: hidden;
 	width: 100%;

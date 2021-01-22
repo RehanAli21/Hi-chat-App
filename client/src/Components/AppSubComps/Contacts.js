@@ -5,12 +5,8 @@ const Contacts = () => {
 	return (
 		<div className='contacts'>
 			<div className='findFriends'>
-				<input
-					type='text'
-					name='findFriend'
-					id='findFriend'
-					placeholder='Find Friend'
-				/>
+				<button class='btn btn-primary'>Requests</button>
+				<button class='btn btn-primary'>Find Friends</button>
 			</div>
 			<div className='contactSection'>
 				<Contact
