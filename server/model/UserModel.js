@@ -20,7 +20,9 @@ const UserSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
-	friends: []
+	friends: {
+		type: Array
+	}
 })
 
 module.exports = mongoose.model('User', UserSchema)
