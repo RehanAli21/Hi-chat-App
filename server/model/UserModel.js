@@ -22,6 +22,9 @@ const UserSchema = mongoose.Schema({
 	},
 	friends: {
 		type: Array
+	},
+	requests: {
+		type: Array
 	}
 })
 
