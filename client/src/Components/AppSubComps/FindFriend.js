@@ -1,6 +1,72 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
 
 const FindFriend = ({ ff, changeFind }) => {
+	const [username, setUsername] = useState('')
+	const [name, setName] = useState('')
+	const [u, setU] = useState('')
+	const [show, setShow] = useState(false)
+	const id = window.localStorage.getItem('id')
+
+	const onSearch = () => {
+		axios
+			.get(`http://localhost:5000/request/${username}`)
+			.then(res => {
+				setName(res.data.name ? res.data.name : res.data.msg)
+				setU(res.data.username)
+				setShow(true)
+			})
+			.catch(err => console.error(err))
+	}
+
+	const result = () => {
+		return name !== 'Username did not match!' ? (
+			<div
+				style={{ display: show ? 'block' : 'none' }}
+				className='peoples'>
+				<div className='people'>
+					<div>
+						<h2>{name}</h2>
+					</div>
+					<h2 onClick={sendRequest} className='req-btn'>
+						Add
+					</h2>
+				</div>
+			</div>
+		) : (
+			<div
+				style={{ display: show ? 'block' : 'none' }}
+				className='peoples'>
+				<div className='people'>
+					<div>
+						<h2>{name}</h2>
+					</div>
+				</div>
+			</div>
+		)
+	}
+
+	const sendRequest = () => {
+		axios
+			.put('http://localhost:5000/request/send', {
+				id: id,
+				username: u
+			})
+			.then(res => {
+				alert(res.data.msg)
+				clearComponentData()
+				changeFind()
+			})
+			.catch(err => console.log(err))
+	}
+
+	const clearComponentData = () => {
+		setUsername('')
+		setName('')
+		setShow(false)
+		document.getElementById('find-input-username').value = ''
+	}
+
 	return (
 		<div className='ffd' style={{ display: ff ? 'block' : 'none' }}>
 			<div className='one'>
@@ -9,33 +75,18 @@ const FindFriend = ({ ff, changeFind }) => {
 						Close
 					</button>
 				</div>
+				<h1 style={{ margin: '-20px 0px 20px 0px' }}>Find Friend</h1>
 				<input
 					type='text'
 					name='username'
-					id='usename'
+					id='find-input-username'
 					placeholder='Enter Name'
+					onChange={e => setUsername(e.target.value)}
 				/>
-				<button className='btn btn-primary'>Find</button>
-				<div className='peoples'>
-					<div className='people'>
-						<div>
-							<h2>username</h2>
-						</div>
-						<h2 className='req-btn'>Add</h2>
-					</div>
-					<div className='people'>
-						<div>
-							<h2>username</h2>
-						</div>
-						<h2 className='req-btn'>Add</h2>
-					</div>
-					<div className='people'>
-						<div>
-							<h2>username</h2>
-						</div>
-						<h2 className='req-btn'>Add</h2>
-					</div>
-				</div>
+				<button className='btn btn-primary' onClick={onSearch}>
+					Find
+				</button>
+				{result()}
 			</div>
 		</div>
 	)
