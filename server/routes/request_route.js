@@ -2,7 +2,7 @@ const router = require('express').Router()
 const UserModel = require('../model/UserModel')
 
 //for getting received requests
-router.get('received/:id', async (req, res) => {
+router.get('/received/:id', async (req, res) => {
 	try {
 		//taking data from user to see request data
 		const user = await UserModel.findOne({ _id: req.params.id })
@@ -17,7 +17,7 @@ router.get('received/:id', async (req, res) => {
 })
 
 //for getting sended requests
-router.get('sended/:id', async (req, res) => {
+router.get('/sended/:id', async (req, res) => {
 	try {
 		//taking data from user to see request data
 		const user = await UserModel.findOne({ _id: req.params.id })
