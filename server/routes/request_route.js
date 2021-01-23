@@ -149,4 +149,39 @@ router.put('/add', async (req, res) => {
 	}
 })
 
+router.put('/remove', async (req, res) => {
+	try {
+		const receiver = await UserModel.findOne({ _id: req.body.id })
+		const sender = await UserModel.findOne({ username: req.body.username })
+
+		//It Remove the request sender data from
+		//requested user's requset_received array
+		await receiver.updateOne({
+			$pull: {
+				request_received: {
+					username: sender.username,
+					name: sender.name
+				}
+			}
+		})
+
+		//It removes the request receiver data from
+		//sender user's requset_received array
+		await sender.updateOne({
+			$pull: {
+				request_sended: {
+					username: receiver.username,
+					name: receiver.name
+				}
+			}
+		})
+
+		res.status(200).send({
+			msg: `Request from ${sender.name} has been removed`
+		})
+	} catch (error) {
+		res.send({ msg: 'error' })
+	}
+})
+
 module.exports = router
