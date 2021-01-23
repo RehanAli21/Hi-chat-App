@@ -23,7 +23,10 @@ const UserSchema = mongoose.Schema({
 	friends: {
 		type: Array
 	},
-	requests: {
+	request_sended: {
+		type: Array
+	},
+	request_received: {
 		type: Array
 	}
 })

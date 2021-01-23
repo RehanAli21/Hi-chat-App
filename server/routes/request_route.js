@@ -1,8 +1,8 @@
 const router = require('express').Router()
 const UserModel = require('../model/UserModel')
 
-//for getting requests array from data
-router.get('/:id', async (req, res) => {
+//for getting received requests
+router.get('received/:id', async (req, res) => {
 	try {
 		//taking data from user to see request data
 		const user = await UserModel.findOne({ _id: req.params.id })
@@ -10,7 +10,22 @@ router.get('/:id', async (req, res) => {
 		if (!user) return res.status(404).send({ msg: 'User not found' })
 
 		//sended request data
-		res.status(200).send({ requests: user.requests })
+		res.status(200).send({ request_received: user.request_received })
+	} catch (err) {
+		res.status(400).send({ msg: 'error' })
+	}
+})
+
+//for getting sended requests
+router.get('sended/:id', async (req, res) => {
+	try {
+		//taking data from user to see request data
+		const user = await UserModel.findOne({ _id: req.params.id })
+
+		if (!user) return res.status(404).send({ msg: 'User not found' })
+
+		//sended request data
+		res.status(200).send({ request_sended: user.request_sended })
 	} catch (err) {
 		res.status(400).send({ msg: 'error' })
 	}
@@ -53,41 +68,29 @@ router.put('/send', async (req, res) => {
 			return res.status(404).send({ msg: 'Error' })
 
 		//checking if user already sended the request
-		currentUser.requests.forEach(request => {
+		currentUser.request_sended.forEach(request => {
 			if (request.username === req.body.username)
 				return res.send({ msg: 'Already Requested' })
 		})
 
-		//adding the request in current user data,
+		//adding the request into current user data,
 		//so the request can't be sended again
 		await currentUser.updateOne({
 			$push: {
-				requests: {
-					sender: {
-						username: currentUser.username,
-						name: currentUser.name
-					},
-					receiver: {
-						username: requestedUser.username,
-						name: requestedUser.name
-					}
+				request_sended: {
+					username: requestedUser.username,
+					name: requestedUser.name
 				}
 			}
 		})
 
-		//adding the request in requested user data
+		//adding the request into requested user's data
 		//so the user can know that he has a friend request
 		await requestedUser.updateOne({
 			$push: {
-				requests: {
-					sender: {
-						username: currentUser.username,
-						name: currentUser.name
-					},
-					receiver: {
-						username: requestedUser.username,
-						name: requestedUser.name
-					}
+				request_received: {
+					username: currentUser.username,
+					name: currentUser.name
 				}
 			}
 		})
@@ -97,18 +100,5 @@ router.put('/send', async (req, res) => {
 		return res.status(400).send({ msg: 'error' })
 	}
 })
-
-//for accepting and rejecting requests
-// router.put('/add', async (req, res) => {
-// 	try {
-// 		const requestResponser = await UserModel.findOneAndUpdate(
-// 			{ _id: req.body.id },
-// 			{ $pull: { requests: { username: req.body.username } } }
-// 		)
-// 		const requestSender = await UserModel.findOneAndUpdate({})
-// 	} catch (error) {
-// 		res.send({ msg: 'error' })
-// 	}
-// })
 
 module.exports = router
