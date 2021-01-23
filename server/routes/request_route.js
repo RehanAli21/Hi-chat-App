@@ -38,7 +38,7 @@ router.get('/:username', async (req, res) => {
 })
 
 //for sending requests
-router.put('/', async (req, res) => {
+router.put('/send', async (req, res) => {
 	try {
 		//Finding Current User
 		const currentUser = await UserModel.findOne({ _id: req.body.id })
@@ -60,42 +60,55 @@ router.put('/', async (req, res) => {
 
 		//adding the request in current user data,
 		//so the request can't be sended again
-		//if send is true means this user sended request
-		//else this user received request
-		await UserModel.findOneAndUpdate(
-			{ _id: req.body.id },
-			{
-				$push: {
-					requests: {
-						username: req.body.username,
-						name: req.body.name,
-						send: true
+		await currentUser.updateOne({
+			$push: {
+				requests: {
+					sender: {
+						username: currentUser.username,
+						name: currentUser.name
+					},
+					receiver: {
+						username: requestedUser.username,
+						name: requestedUser.name
 					}
 				}
 			}
-		)
+		})
 
 		//adding the request in requested user data
 		//so the user can know that he has a friend request
-		//if send is true means this user sended request
-		//else this user received request
-		await UserModel.findOneAndUpdate(
-			{ username: req.body.username },
-			{
-				$push: {
-					requests: {
-						username: req.body.username,
-						name: req.body.name,
-						send: false
+		await requestedUser.updateOne({
+			$push: {
+				requests: {
+					sender: {
+						username: currentUser.username,
+						name: currentUser.name
+					},
+					receiver: {
+						username: requestedUser.username,
+						name: requestedUser.name
 					}
 				}
 			}
-		)
+		})
 
 		res.status(200).send({ msg: 'Request has been send' })
 	} catch (err) {
 		return res.status(400).send({ msg: 'error' })
 	}
 })
+
+//for accepting and rejecting requests
+// router.put('/add', async (req, res) => {
+// 	try {
+// 		const requestResponser = await UserModel.findOneAndUpdate(
+// 			{ _id: req.body.id },
+// 			{ $pull: { requests: { username: req.body.username } } }
+// 		)
+// 		const requestSender = await UserModel.findOneAndUpdate({})
+// 	} catch (error) {
+// 		res.send({ msg: 'error' })
+// 	}
+// })
 
 module.exports = router
