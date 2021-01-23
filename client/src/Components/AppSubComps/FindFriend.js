@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 
 const FindFriend = ({ ff, changeFind }) => {
-	const [username, setUsername] = useState('')
+	const [input, setInput] = useState('')
 	const [name, setName] = useState('')
 	const [u, setU] = useState('')
 	const [show, setShow] = useState(false)
@@ -10,8 +10,13 @@ const FindFriend = ({ ff, changeFind }) => {
 
 	const onSearch = () => {
 		axios
-			.get(`http://localhost:5000/request/${username}`)
+			.get(`http://localhost:5000/request/${input}`)
 			.then(res => {
+				if (
+					res.data.username ===
+					window.localStorage.getItem('username')
+				)
+					return alert('The searched username is yours')
 				setName(res.data.name ? res.data.name : res.data.msg)
 				setU(res.data.username)
 				setShow(true)
@@ -61,7 +66,7 @@ const FindFriend = ({ ff, changeFind }) => {
 	}
 
 	const clearComponentData = () => {
-		setUsername('')
+		setInput('')
 		setName('')
 		setShow(false)
 		document.getElementById('find-input-username').value = ''
@@ -81,7 +86,7 @@ const FindFriend = ({ ff, changeFind }) => {
 					name='username'
 					id='find-input-username'
 					placeholder='Enter Name'
-					onChange={e => setUsername(e.target.value)}
+					onChange={e => setInput(e.target.value)}
 				/>
 				<button className='btn btn-primary' onClick={onSearch}>
 					Find
