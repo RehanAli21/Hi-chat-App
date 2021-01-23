@@ -101,4 +101,52 @@ router.put('/send', async (req, res) => {
 	}
 })
 
+//for accepting the request for adding friend
+router.put('/add', async (req, res) => {
+	try {
+		const receiver = await UserModel.findOne({ _id: req.body.id })
+		const sender = await UserModel.findOne({ username: req.body.username })
+
+		//first it remove the request sender data from
+		//requested user's requset_received array, then
+		//it adds sender data into friends array of requested_user
+		await receiver.updateOne({
+			$pull: {
+				request_received: {
+					username: sender.username,
+					name: sender.name
+				}
+			},
+			$push: {
+				friends: {
+					username: sender.username,
+					name: sender.name
+				}
+			}
+		})
+
+		//first it remove the request receiver data from
+		//sender user's requset_received array, then
+		//it adds receiver data into friends array of sender
+		await sender.updateOne({
+			$pull: {
+				request_sended: {
+					username: receiver.username,
+					name: receiver.name
+				}
+			},
+			$push: {
+				friends: {
+					username: receiver.username,
+					name: receiver.name
+				}
+			}
+		})
+
+		res.status(200).send({ msg: `Now you are friend with ${sender.name}` })
+	} catch (error) {
+		res.send({ msg: 'error' })
+	}
+})
+
 module.exports = router
