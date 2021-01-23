@@ -37,11 +37,10 @@ router.get('/:username', async (req, res) => {
 		//finding the user to which we want to send request by its username
 		const user = await UserModel.findOne({ username: req.params.username })
 
-		if (!user)
-			return res.status(404).send({ msg: 'Username did not match!' })
+		if (!user) return res.send({ msg: 'Username did not match!' })
 
 		//checking if request already sended
-		user.requests.forEach(request => {
+		user.request_sended.forEach(request => {
 			if (request.username === req.body.username)
 				return res.send({ msg: 'Already Requested' })
 		})
@@ -66,6 +65,9 @@ router.put('/send', async (req, res) => {
 		//checking if user and requested user is found or not
 		if (!currentUser || !requestedUser)
 			return res.status(404).send({ msg: 'Error' })
+
+		if (currentUser.username === requestedUser.username)
+			return res.send({ msg: 'You can not send request to yourself' })
 
 		//checking if user already sended the request
 		currentUser.request_sended.forEach(request => {
