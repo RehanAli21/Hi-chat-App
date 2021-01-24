@@ -59,10 +59,10 @@ const FindFriend = ({ ff, changeFind }) => {
 			})
 			.then(res => {
 				alert(res.data.msg)
-				clearComponentData()
-				changeFind()
 			})
-			.catch(err => console.log(err))
+			.catch(err => alert('Username is same as yours username'))
+
+		clearComponentData()
 	}
 
 	const clearComponentData = () => {
