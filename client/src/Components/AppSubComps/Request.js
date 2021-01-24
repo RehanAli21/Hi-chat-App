@@ -17,6 +17,32 @@ const Request = ({ req, changeReq }) => {
 			.catch(err => console.error(err))
 	}
 
+	const acceptReq = username => {
+		axios
+			.put(`http://localhost:5000/request/add`, {
+				id: window.localStorage.getItem('id'),
+				username: username
+			})
+			.then(res => {
+				alert(res.data.msg)
+				getRequests()
+			})
+			.catch(err => console.log(err))
+	}
+
+	const rejectReq = username => {
+		axios
+			.put(`http://localhost:5000/request/remove`, {
+				id: window.localStorage.getItem('id'),
+				username: username
+			})
+			.then(res => {
+				alert(res.data.msg)
+				getRequests()
+			})
+			.catch(err => console.log(err))
+	}
+
 	const showReq = () => {
 		return received_reqs.length > 0 ? (
 			received_reqs.map(req => (
@@ -27,7 +53,11 @@ const Request = ({ req, changeReq }) => {
 						className='req-btn'>
 						Add
 					</h2>
-					<h2 className='req-btn'>Remove</h2>
+					<h2
+						onClick={() => rejectReq(req.username)}
+						className='req-btn'>
+						Remove
+					</h2>
 				</div>
 			))
 		) : (
@@ -35,18 +65,6 @@ const Request = ({ req, changeReq }) => {
 				<h2>No Requests</h2>
 			</div>
 		)
-	}
-
-	const acceptReq = username => {
-		axios
-			.put(`http://localhost:5000/request/add`, {
-				id: window.localStorage.getItem('id'),
-				username: username
-			})
-			.then(res => alert(res.data.msg))
-			.catch(err => console.log(err))
-
-		showReq()
 	}
 
 	return (
