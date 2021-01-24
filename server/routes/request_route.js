@@ -69,6 +69,13 @@ router.put('/send', async (req, res) => {
 		if (currentUser.username === requestedUser.username)
 			return res.send({ msg: 'You can not send request to yourself' })
 
+		currentUser.friends.forEach(friend => {
+			if (friend.username === requestedUser.username) {
+				res.send({ msg: 'Already added as friend' })
+				throw Error
+			}
+		})
+
 		//checking if user already sended the request
 		currentUser.request_sended.forEach(request => {
 			if (request.username === req.body.username) {
@@ -112,7 +119,8 @@ router.put('/add', async (req, res) => {
 
 		receiver.friends.forEach(friend => {
 			if (friend.username === req.body.username) {
-				return res.status(400)
+				res.send({ msg: 'Already added as friend' })
+				throw Error
 			}
 		})
 
