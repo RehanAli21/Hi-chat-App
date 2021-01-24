@@ -20,7 +20,7 @@ const Login = ({ changeTheme }) => {
 					history.push('/app')
 				}
 			})
-			.catch(err => console.error(err))
+			.catch(err => alert('Username or password is incorrent'))
 	}
 
 	return (
@@ -34,7 +34,6 @@ const Login = ({ changeTheme }) => {
 				<div>
 					<input
 						type='text'
-						autoComplete='false'
 						name='username'
 						id='username'
 						placeholder='Username...'

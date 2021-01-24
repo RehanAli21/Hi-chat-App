@@ -26,7 +26,10 @@ const SignUp = ({ changeTheme }) => {
 				recover
 			})
 			.then(res => {
-				if (res.status === 200) history.push('/')
+				if (res.status === 200) {
+					alert(res.data.msg)
+					history.push('/')
+				}
 			})
 			.catch(err => console.error(err))
 	}
