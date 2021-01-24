@@ -13,6 +13,14 @@ const Nav = ({ t }) => {
 	const onSignOut = () => {
 		window.localStorage.setItem('id', '')
 		window.localStorage.setItem('username', '')
+
+		const link = document.getElementById('styles')
+		if (theme === 'dark') {
+			link.href = 'SignIn-dark.css'
+		} else if (theme === 'white') {
+			link.href = 'SignIn.css'
+		}
+
 		history.push('/')
 	}
 

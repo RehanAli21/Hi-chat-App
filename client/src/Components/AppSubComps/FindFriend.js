@@ -60,7 +60,11 @@ const FindFriend = ({ ff, changeFind }) => {
 			.then(res => {
 				alert(res.data.msg)
 			})
-			.catch(err => alert('Username is same as yours username'))
+			.catch(err =>
+				alert(
+					'Either you sended request or received request from this user'
+				)
+			)
 
 		clearComponentData()
 	}

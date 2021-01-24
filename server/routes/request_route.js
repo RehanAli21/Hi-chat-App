@@ -110,6 +110,12 @@ router.put('/add', async (req, res) => {
 		const receiver = await UserModel.findOne({ _id: req.body.id })
 		const sender = await UserModel.findOne({ username: req.body.username })
 
+		receiver.friends.forEach(friend => {
+			if (friend.username === req.body.username) {
+				return res.status(400)
+			}
+		})
+
 		//first it remove the request sender data from
 		//requested user's requset_received array, then
 		//it adds sender data into friends array of requested_user
