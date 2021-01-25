@@ -64,13 +64,11 @@ router.put('/send', async (req, res) => {
 
 		//checking if user and requested user is found or not
 		if (!currentUser || !requestedUser) {
-			console.log('not found')
 			return res.status(404).send({ msg: 'Error' })
 		}
 
 		//checking if user is sending request to itself
 		if (currentUser.username === requestedUser.username) {
-			console.log('same')
 			return res.send({ msg: 'You can not send request to yourself' })
 		}
 
@@ -135,14 +133,14 @@ router.put('/add', async (req, res) => {
 			$pull: {
 				request_received: {
 					username: sender.username,
-					name: sender.name,
-					msgs: []
+					name: sender.name
 				}
 			},
 			$push: {
 				friends: {
 					username: sender.username,
-					name: sender.name
+					name: sender.name,
+					msgs: []
 				}
 			}
 		})
