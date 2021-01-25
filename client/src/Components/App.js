@@ -1,36 +1,38 @@
 import React, { useState, useEffect } from 'react'
-import io from 'socket.io-client'
+import axios from 'axios'
 import Nav from './AppSubComps/Nav'
 import Contacts from './AppSubComps/Contacts'
 import Msgs from './AppSubComps/Msgs'
 
-let socket
-
 const App = ({ theme }) => {
-	const [id, setId] = useState('')
-	const [username, setUsername] = useState('')
+	const id = window.localStorage.getItem('id')
+	const [changes, setChanges] = useState(false)
+	const [friends, setFriends] = useState([])
 	const ENDPOINT = 'http://localhost:5000/'
 
 	useEffect(() => {
-		setId(window.localStorage.getItem('id'))
-		setUsername(window.localStorage.getItem('username'))
+		getFriends()
+	}, [changes])
 
-		socket = io(ENDPOINT)
+	const getFriends = () => {
+		axios
+			.get(ENDPOINT + `friend/${id}`)
+			.then(res => setFriends(res.data.friends))
+			.catch(err => console.error(err))
+	}
 
-		socket.emit('join', { username: username, room: username })
-
-		return () => {
-			socket.emit('disconnect')
-			socket.off()
-		}
-	}, [ENDPOINT])
+	const onChange = () => setChanges(!changes)
 
 	return (
 		<div>
 			<Nav t={theme} />
 			<main>
-				<Contacts />
-				<Msgs />
+				<Contacts
+					friends={friends}
+					changes={changes}
+					onChange={onChange}
+				/>
+				<Msgs friends={friends} changes={changes} onChange={onChange} />
 			</main>
 		</div>
 	)
