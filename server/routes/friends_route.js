@@ -1,7 +1,16 @@
 const router = require('express').Router()
 const UserModel = require('../model/UserModel')
-const Joi = require('joi')
 
-router.get('/', (req, res) => res.send('you are at friend'))
+router.get('/:id', async (req, res) => {
+	try {
+		const user = await UserModel.findOne({ _id: req.params.id })
+
+		if (!user) return res.send({ msg: 'User not Found' })
+
+		res.send({ friends: user.friends })
+	} catch (error) {
+		res.send({ msg: 'error' })
+	}
+})
 
 module.exports = router
