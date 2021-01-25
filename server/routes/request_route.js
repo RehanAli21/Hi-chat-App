@@ -63,25 +63,29 @@ router.put('/send', async (req, res) => {
 		})
 
 		//checking if user and requested user is found or not
-		if (!currentUser || !requestedUser)
+		if (!currentUser || !requestedUser) {
+			console.log('not found')
 			return res.status(404).send({ msg: 'Error' })
+		}
 
-		if (currentUser.username === requestedUser.username)
+		//checking if user is sending request to itself
+		if (currentUser.username === requestedUser.username) {
+			console.log('same')
 			return res.send({ msg: 'You can not send request to yourself' })
+		}
 
-		currentUser.friends.forEach(friend => {
-			if (friend.username === requestedUser.username) {
-				res.send({ msg: 'Already added as friend' })
-				throw Error
-			}
-		})
+		//checking if user is sending request to a user,
+		//which is already friend
+		const alreadyFriend = currentUser.friends.find(
+			friend => friend.username === req.body.username
+		)
+		if (alreadyFriend) return res.send({ msg: 'Already added as friend' })
 
 		//checking if user already sended the request
-		currentUser.request_sended.forEach(request => {
-			if (request.username === req.body.username) {
-				throw Error
-			}
-		})
+		const alreadyReqSended = currentUser.request_sended.find(
+			req => req.username === req.body.username
+		)
+		if (alreadyReqSended) return res.send({ msg: 'Request Already Sended' })
 
 		//adding the request into current user data,
 		//so the request can't be sended again
@@ -117,12 +121,12 @@ router.put('/add', async (req, res) => {
 		const receiver = await UserModel.findOne({ _id: req.body.id })
 		const sender = await UserModel.findOne({ username: req.body.username })
 
-		receiver.friends.forEach(friend => {
-			if (friend.username === req.body.username) {
-				res.send({ msg: 'Already added as friend' })
-				throw Error
-			}
-		})
+		//checking if user is adding a user,
+		//which is already friend
+		const alreadyFriend = receiver.friends.find(
+			friend => friend.username === req.body.username
+		)
+		if (alreadyFriend) return res.send({ msg: 'Already added as friend' })
 
 		//first it remove the request sender data from
 		//requested user's requset_received array, then
@@ -131,7 +135,8 @@ router.put('/add', async (req, res) => {
 			$pull: {
 				request_received: {
 					username: sender.username,
-					name: sender.name
+					name: sender.name,
+					msgs: []
 				}
 			},
 			$push: {
@@ -155,7 +160,8 @@ router.put('/add', async (req, res) => {
 			$push: {
 				friends: {
 					username: receiver.username,
-					name: receiver.name
+					name: receiver.name,
+					msgs: []
 				}
 			}
 		})
