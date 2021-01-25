@@ -1,15 +1,32 @@
 import React, { useState } from 'react'
+import ScrollToBottom from 'react-scroll-to-bottom'
 import Contact from './Contact'
 import Request from './Request'
 import FindFriend from './FindFriend'
 
-const Contacts = () => {
+const Contacts = ({ friends, onChange }) => {
 	const [req, setReq] = useState(false)
 	const [ff, setFf] = useState(false)
 
-	const changeReq = () => setReq(!req)
+	const changeReq = () => {
+		onChange()
+		setReq(!req)
+	}
 
-	const changeFind = () => setFf(!ff)
+	const changeFind = () => {
+		onChange()
+		setFf(!ff)
+	}
+
+	const showContact = () => {
+		return friends.map(friend => (
+			<Contact
+				key={friend.username}
+				username={friend.username.toUpperCase()}
+				msg={friend.msgs[0] ? friend.msgs[0] : 'No messages'}
+			/>
+		))
+	}
 
 	return (
 		<div className='contacts'>
@@ -23,23 +40,10 @@ const Contacts = () => {
 				<Request req={req} changeReq={changeReq} />
 				<FindFriend ff={ff} changeFind={changeFind} />
 			</div>
-			<div className='contactSection'>
-				<Contact
-					username='Salman'
-					msg='Han yar kesa hay'
-					img='de-dak.png'
-				/>
-				<Contact
-					username='Rehan'
-					msg='Han yar kesa hay'
-					img='de-dak.png'
-				/>
-				<Contact username='Ali' msg='Mar ja kutte' img='de-dak.png' />
-				<Contact
-					username='Rizwan'
-					msg='Sain upload kerdi report'
-					img='de-dak.png'
-				/>
+			<div>
+				<ScrollToBottom className='contactSection'>
+					{showContact()}
+				</ScrollToBottom>
 			</div>
 		</div>
 	)

@@ -54,6 +54,10 @@ main {
 	max-height: 90vh;
 }
 
+.contactSection {
+	height: 75vh;
+}
+
 .findFriends {
 	width: 100%;
 	text-align: center;

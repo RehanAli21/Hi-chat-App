@@ -140,6 +140,10 @@ main {
 	padding: 15px 0px;
 }
 
+.contactSection {
+	height: 75vh;
+}
+
 .contactDetails {
 	width: 90%;
 	border-bottom: 1px solid var(--color);
