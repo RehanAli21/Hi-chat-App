@@ -139,6 +139,17 @@ main {
 	width: 100%;
 	padding: 15px 0px;
 }
+.contact:active {
+	background-color: var(--color);
+	color: white;
+	border-color: white;
+}
+.contact:active p {
+	color: white;
+}
+.contact:active .contactDetails {
+	border-bottom: 1px solid White;
+}
 
 .contactSection {
 	height: 75vh;
@@ -159,17 +170,6 @@ main {
 .contactDetails p {
 	color: gray;
 	margin-left: 10px;
-}
-
-.contactActivated {
-	background-color: var(--color);
-	color: white;
-}
-.contactActivated p {
-	color: white;
-}
-.contactActivated .contactDetails {
-	border-bottom: 1px solid White;
 }
 
 .msgs {
