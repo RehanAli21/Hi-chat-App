@@ -6,15 +6,11 @@ import Request from './Request'
 import FindFriend from './FindFriend'
 
 const Contacts = ({ id }) => {
-	const [friends, activeUser, onChange, setId, setActiveUser] = useContext(
+	const [friends, activeUser, onChange, setActiveUser] = useContext(
 		FriendsContext
 	)
 	const [req, setReq] = useState(false)
 	const [ff, setFf] = useState(false)
-
-	useEffect(() => {
-		setId(id)
-	}, [])
 
 	const onSetActiveUser = username => setActiveUser(username)
 
