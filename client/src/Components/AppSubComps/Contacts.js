@@ -1,12 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { FriendsContext } from './FriendsContext'
 import ScrollToBottom from 'react-scroll-to-bottom'
 import Contact from './Contact'
 import Request from './Request'
 import FindFriend from './FindFriend'
 
-const Contacts = ({ friends, onChange }) => {
+const Contacts = ({ id }) => {
+	const [friends, onChange, setId] = useContext(FriendsContext)
 	const [req, setReq] = useState(false)
 	const [ff, setFf] = useState(false)
+
+	useEffect(() => {
+		setId(id)
+	}, [])
 
 	const changeReq = () => {
 		onChange()
@@ -19,11 +25,11 @@ const Contacts = ({ friends, onChange }) => {
 	}
 
 	const showContact = () => {
-		return friends.map(friend => (
+		return friends.map(ele => (
 			<Contact
-				key={friend.username}
-				username={friend.username.toUpperCase()}
-				msg={friend.msgs[0] ? friend.msgs[0] : 'No messages'}
+				key={ele.username}
+				username={ele.username.toUpperCase()}
+				msg={ele.msgs[0] ? ele.msgs[0] : 'No messages'}
 			/>
 		))
 	}
