@@ -6,13 +6,17 @@ import Request from './Request'
 import FindFriend from './FindFriend'
 
 const Contacts = ({ id }) => {
-	const [friends, onChange, setId] = useContext(FriendsContext)
+	const [friends, activeUser, onChange, setId, setActiveUser] = useContext(
+		FriendsContext
+	)
 	const [req, setReq] = useState(false)
 	const [ff, setFf] = useState(false)
 
 	useEffect(() => {
 		setId(id)
 	}, [])
+
+	const onSetActiveUser = username => setActiveUser(username)
 
 	const changeReq = () => {
 		onChange()
@@ -28,8 +32,9 @@ const Contacts = ({ id }) => {
 		return friends.map(ele => (
 			<Contact
 				key={ele.username}
-				username={ele.username.toUpperCase()}
+				username={ele.username}
 				msg={ele.msgs[0] ? ele.msgs[0] : 'No messages'}
+				onSetActiveUser={onSetActiveUser}
 			/>
 		))
 	}

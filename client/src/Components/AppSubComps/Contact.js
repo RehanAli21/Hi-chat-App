@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Contact = ({ username, msg }) => {
+const Contact = ({ username, msg, onSetActiveUser }) => {
 	return (
-		<div className='contact'>
+		<div onClick={() => onSetActiveUser(username)} className='contact'>
 			<div className='contactDetails'>
-				<h3>{username}</h3>
+				<h3>{username.toUpperCase()}</h3>
 				<p>{msg}</p>
 			</div>
 		</div>

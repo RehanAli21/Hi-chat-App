@@ -8,7 +8,7 @@ export const FriendsProvider = props => {
 	const [changes, setChanges] = useState(false)
 	const [id, setId] = useState('')
 	const ENDPOINT = 'http://localhost:5000/'
-	const [activeUser, setActivUser] = useState('')
+	const [activeUser, setActiveUser] = useState('')
 
 	const onChange = () => setChanges(!changes)
 
@@ -24,7 +24,8 @@ export const FriendsProvider = props => {
 	}
 
 	return (
-		<FriendsContext.Provider value={[friends, onChange, setId]}>
+		<FriendsContext.Provider
+			value={[friends, activeUser, onChange, setId, setActiveUser]}>
 			{props.children}
 		</FriendsContext.Provider>
 	)
