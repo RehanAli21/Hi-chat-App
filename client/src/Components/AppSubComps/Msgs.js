@@ -1,11 +1,33 @@
-import React, { useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { FriendsContext } from './FriendsContext'
+import io from 'socket.io-client'
 import Msg from './Msg'
 
+let socket
+
 const Msgs = () => {
+	const ENDPOINT = 'http://localhost:5000/'
+
 	const [friends, activeUser, onChange, setActiveUser] = useContext(
 		FriendsContext
 	)
+
+	useEffect(() => {
+		socket = io(ENDPOINT)
+		console.log(socket)
+		socket.emit(
+			'join',
+			{
+				username: window.localStorage.getItem('username')
+			},
+			({ error }) => alert(error)
+		)
+
+		return () => {
+			socket.emit('disconnect')
+			socket.off()
+		}
+	}, [ENDPOINT])
 
 	return (
 		<div className='msgs'>
