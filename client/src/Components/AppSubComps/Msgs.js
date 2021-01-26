@@ -1,12 +1,30 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { FriendsContext } from './FriendsContext'
 import Msg from './Msg'
 
 const Msgs = () => {
+	const [friends, activeUser, onChange, setActiveUser] = useContext(
+		FriendsContext
+	)
+
 	return (
 		<div className='msgs'>
 			<div className='msg-section'>
-				<Msg user='me' msg='Hello, How Are you' />
-				<Msg user='notme' msg='I am fine How are you' />
+				{activeUser === '' ? (
+					<h1
+						style={{
+							margin: 'auto',
+							color: 'white',
+							textShadow:
+								'3px 3px 3px #007bdb, -3px -3px 3px #007bdb, -3px 3px 3px #007bdb, 3px -3px 3px #007bdb'
+						}}>
+						Hello, Welcome to Hi App
+					</h1>
+				) : (
+					''
+				)}
+				{/* <Msg user='me' msg='Hello, How Are you' />
+				<Msg user='notme' msg='I am fine How are you' /> */}
 			</div>
 			<div className='input-section'>
 				<input

@@ -5,7 +5,7 @@ import axios from 'axios'
 const Login = ({ changeTheme }) => {
 	let [username, setUsername] = useState('')
 	let [password, setPassword] = useState('')
-	const ENDPOINT = 'http://localhost:5000/'
+	const ENDPOINT = 'http://localhost:5000'
 	let history = useHistory()
 
 	const onLogin = () => {
