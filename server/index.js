@@ -16,11 +16,17 @@ app.use(cors())
 app.use(router)
 
 io.on('connection', socket => {
-	console.log('connected new user!')
-
 	socket.on('join', ({ username }, callback) => {
-		console.log(username)
-		// callback({ error: 'error' })
+		const { error, user } = addUser({
+			id: socket.id,
+			username,
+			room: username
+		})
+
+		if (error) return callback({ error: 'error' })
+
+		socket.emit('online', { username })
+		socket.join(user.room)
 	})
 	socket.on('disconnect', () => console.log('Disconnected'))
 })

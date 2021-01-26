@@ -7,6 +7,7 @@ let socket
 
 const Msgs = () => {
 	const ENDPOINT = 'http://localhost:5000/'
+	const username = window.localStorage.getItem('username')
 
 	const [friends, activeUser, onChange, setActiveUser] = useContext(
 		FriendsContext
@@ -15,19 +16,17 @@ const Msgs = () => {
 	useEffect(() => {
 		socket = io(ENDPOINT)
 		console.log(socket)
-		socket.emit(
-			'join',
-			{
-				username: window.localStorage.getItem('username')
-			},
-			({ error }) => alert(error)
-		)
+		socket.emit('join', { username: username }, ({ error }) => alert(error))
 
 		return () => {
 			socket.emit('disconnect')
 			socket.off()
 		}
 	}, [ENDPOINT])
+
+	useEffect(() => {
+		socket.on('online', msg => console.log(msg))
+	}, [])
 
 	return (
 		<div className='msgs'>
@@ -40,7 +39,7 @@ const Msgs = () => {
 							textShadow:
 								'3px 3px 3px #007bdb, -3px -3px 3px #007bdb, -3px 3px 3px #007bdb, 3px -3px 3px #007bdb'
 						}}>
-						Hello, Welcome to Hi App
+						Hello {username.toUpperCase()}, Welcome to Hi App
 					</h1>
 				) : (
 					''
