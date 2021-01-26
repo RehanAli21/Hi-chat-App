@@ -3,7 +3,13 @@ const express = require('express')
 const http = require('http')
 const app = express()
 const cors = require('cors')
-const { addUser, removeUser, getUser, getUsersInRoom } = require('./userHelper')
+const {
+	addUser,
+	removeUser,
+	getUserById,
+	getUserByUsername,
+	getUsersInRoom
+} = require('./userHelper')
 
 const server = http.createServer(app)
 const io = require('socket.io')(server)
@@ -16,7 +22,7 @@ app.use(cors())
 app.use(router)
 
 io.on('connection', socket => {
-	socket.on('join', ({ username }, callback) => {
+	socket.on('join', ({ username, friends }, callback) => {
 		const { error, user } = addUser({
 			id: socket.id,
 			username,
@@ -25,8 +31,22 @@ io.on('connection', socket => {
 
 		if (error) return callback({ error: 'error' })
 
-		socket.emit('online', { username })
-		socket.join(user.room)
+		socket.emit('online', { username: user.username, text: 'I am Online' })
+
+		socket.broadcast.to(username).emit('online', {
+			username: user.username,
+			text: `${username} is online`
+		})
+
+		const rooms = []
+		friends.forEach(friend => {
+			const presentUser = getUserByUsername(friend.username)
+			if (presentUser) {
+				rooms.push(presentUser.room)
+			}
+		})
+
+		socket.join(rooms)
 	})
 	socket.on('disconnect', () => console.log('Disconnected'))
 })

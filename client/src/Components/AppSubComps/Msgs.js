@@ -9,24 +9,33 @@ const Msgs = () => {
 	const ENDPOINT = 'http://localhost:5000/'
 	const username = window.localStorage.getItem('username')
 
-	const [friends, activeUser, onChange, setActiveUser] = useContext(
-		FriendsContext
-	)
+	const [
+		friends,
+		setFriends,
+		activeUser,
+		onChange,
+		setActiveUser
+	] = useContext(FriendsContext)
 
 	useEffect(() => {
 		socket = io(ENDPOINT)
-		console.log(socket)
-		socket.emit('join', { username: username }, ({ error }) => alert(error))
+
+		if (username && friends.length > 0) {
+			console.log(socket)
+			socket.emit(
+				'join',
+				{ username: username, friends: friends },
+				({ error }) => alert(error)
+			)
+
+			socket.on('online', msg => console.log(msg))
+		}
 
 		return () => {
 			socket.emit('disconnect')
 			socket.off()
 		}
-	}, [ENDPOINT])
-
-	useEffect(() => {
-		socket.on('online', msg => console.log(msg))
-	}, [])
+	}, [username, friends])
 
 	return (
 		<div className='msgs'>

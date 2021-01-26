@@ -31,6 +31,7 @@ const Contacts = () => {
 				username={ele.username}
 				msg={ele.msgs[0] ? ele.msgs[0] : 'No messages'}
 				onSetActiveUser={onSetActiveUser}
+				onlineStatus={ele.onlineStatus}
 			/>
 		))
 	}

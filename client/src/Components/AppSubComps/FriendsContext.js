@@ -9,24 +9,23 @@ export const FriendsProvider = props => {
 	const [activeUser, setActiveUser] = useState('')
 
 	const id = window.localStorage.getItem('id')
-	const ENDPOINT = 'http://localhost:5000/'
 
 	const onChange = () => setChanges(!changes)
 
 	useEffect(() => {
 		getFriends()
-	}, [changes, id])
+	}, [changes])
 
 	const getFriends = () => {
 		axios
-			.get(ENDPOINT + `friend/${id}`)
+			.get(`http://localhost:5000/friend/${id}`)
 			.then(res => setFriends(res.data.friends))
 			.catch(err => console.error(err))
 	}
 
 	return (
 		<FriendsContext.Provider
-			value={[friends, activeUser, onChange, setActiveUser]}>
+			value={[friends, setFriends, activeUser, onChange, setActiveUser]}>
 			{props.children}
 		</FriendsContext.Provider>
 	)
