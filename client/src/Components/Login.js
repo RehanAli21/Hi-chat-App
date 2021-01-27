@@ -1,8 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { UserContext } from './AppSubComps/UserContext'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 const Login = ({ changeTheme }) => {
+	const [
+		friends,
+		getFriends,
+		setFriends,
+		activeUser,
+		setActiveUser
+	] = useContext(UserContext)
+
 	let [username, setUsername] = useState('')
 	let [password, setPassword] = useState('')
 	const ENDPOINT = 'http://localhost:5000'
@@ -18,6 +27,7 @@ const Login = ({ changeTheme }) => {
 					window.localStorage.setItem('username', res.data.username)
 					window.localStorage.setItem('id', res.data.id)
 					window.localStorage.setItem('name', res.data.name)
+					getFriends(res.data.id)
 					history.push('/app')
 				}
 			})
