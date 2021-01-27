@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react'
-import { FriendsContext } from './FriendsContext'
+import { UserContext } from './UserContext'
 import io from 'socket.io-client'
 import Msg from './Msg'
 
@@ -11,30 +11,23 @@ const Msgs = () => {
 
 	const [
 		friends,
+		getFriends,
 		setFriends,
 		activeUser,
-		onChange,
 		setActiveUser
-	] = useContext(FriendsContext)
+	] = useContext(UserContext)
 
 	useEffect(() => {
 		socket = io(ENDPOINT)
 
-		if (username && friends.length > 0) {
-			console.log(socket)
-			socket.emit(
-				'join',
-				{ username: username, friends: friends },
-				({ error }) => alert(error)
-			)
+		console.log(socket)
+		socket.emit(
+			'join',
+			{ username: username, friends: friends },
+			({ error }) => alert(error)
+		)
 
-			socket.on('online', msg => console.log(msg))
-		}
-
-		return () => {
-			socket.emit('disconnect')
-			socket.off()
-		}
+		socket.on('online', msg => console.log(msg))
 	}, [username, friends])
 
 	return (

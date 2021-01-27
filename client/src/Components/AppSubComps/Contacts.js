@@ -1,26 +1,31 @@
 import React, { useState, useContext } from 'react'
-import { FriendsContext } from './FriendsContext'
+import { UserContext } from './UserContext'
 import ScrollToBottom from 'react-scroll-to-bottom'
 import Contact from './Contact'
 import Request from './Request'
 import FindFriend from './FindFriend'
 
 const Contacts = () => {
-	const [friends, activeUser, onChange, setActiveUser] = useContext(
-		FriendsContext
-	)
+	const [
+		friends,
+		getFriends,
+		setFriends,
+		activeUser,
+		setActiveUser
+	] = useContext(UserContext)
+
 	const [req, setReq] = useState(false)
 	const [ff, setFf] = useState(false)
 
 	const onSetActiveUser = username => setActiveUser(username)
 
 	const changeReq = () => {
-		onChange()
+		getFriends(window.localStorage.getItem('id'))
 		setReq(!req)
 	}
 
 	const changeFind = () => {
-		onChange()
+		getFriends(window.localStorage.getItem('id'))
 		setFf(!ff)
 	}
 
