@@ -7,12 +7,17 @@ const {
 	addUser,
 	removeUser,
 	getUserById,
-	getUserByUsername,
-	getUsersInRoom
+	getUsersInRoom,
+	getAllRoom
 } = require('./userHelper')
 
 const server = http.createServer(app)
-const io = require('socket.io')(server)
+const io = require('socket.io')(server, {
+	cors: {
+		origin: '*',
+		methods: ['GET']
+	}
+})
 
 const router = require('./router')
 
@@ -29,26 +34,36 @@ io.on('connection', socket => {
 			room: username
 		})
 
-		if (error) return callback({ error: 'error' })
+		if (error) {
+			callback({ error: 'already Online!!!' })
+		} else {
+			socket.emit('online', {
+				username: user.username,
+				text: 'I am Online'
+			})
+		}
 
-		socket.emit('online', { username: user.username, text: 'I am Online' })
+		const rooms = getAllRoom()
 
-		socket.broadcast.to(username).emit('online', {
-			username: user.username,
-			text: `${username} is online`
-		})
-
-		const rooms = []
+		const activeFriendRooms = []
 		friends.forEach(friend => {
-			const presentUser = getUserByUsername(friend.username)
-			if (presentUser) {
-				rooms.push(presentUser.room)
-			}
+			rooms.forEach(room => {
+				if (room === friend.username) {
+					activeFriendRooms.push(room)
+				}
+			})
 		})
 
 		socket.join(rooms)
+
+		rooms.forEach(room => {
+			socket.broadcast.to(room).emit('online', {
+				username: room,
+				text: `${room} is online`
+			})
+		})
 	})
-	socket.on('disconnect', () => console.log('Disconnected'))
+	socket.on('disconnect', () => {})
 })
 
 //connection to mongodb
