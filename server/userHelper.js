@@ -2,6 +2,14 @@ const { isError } = require('joi')
 
 const users = []
 
+const getAllRoom = () => {
+	const rooms = []
+	users.forEach(user => {
+		rooms.push(user.room)
+	})
+	return rooms
+}
+
 const addUser = ({ id, username, room }) => {
 	username = username.trim().toLowerCase()
 	room = room.trim().toLowerCase()
@@ -26,16 +34,12 @@ const removeUser = ({ id }) => {
 
 const getUserById = ({ id }) => users.find(user => user.id === id)
 
-const getUserByUsername = username => {
-	return users.find(user => user.username === username)
-}
-
 const getUsersInRoom = ({ room }) => users.filter(user => user.room === room)
 
 module.exports = {
 	addUser,
 	removeUser,
 	getUserById,
-	getUserByUsername,
-	getUsersInRoom
+	getUsersInRoom,
+	getAllRoom
 }
