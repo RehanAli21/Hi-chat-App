@@ -27,7 +27,6 @@ const addUser = ({ id, username, room }) => {
 const removeUser = ({ username }) => {
 	const temp = users.filter(user => user.room === username)
 	users = temp
-	console.log(users)
 }
 
 const getUserById = ({ id }) => users.find(user => user.id === id)

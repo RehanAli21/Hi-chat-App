@@ -27,18 +27,12 @@ app.use(cors())
 app.use(router)
 
 io.on('connection', socket => {
-	socket.on('join', ({ username, friends }, callback) => {
+	socket.on('join', ({ username, friends }) => {
 		const { error, user } = addUser({
 			id: socket.id,
 			username,
 			room: username
 		})
-
-		if (error) {
-			callback({ error: 'already Online!!!' })
-		} else {
-			socket.emit('online', { username: user.username })
-		}
 
 		const rooms = getAllRoom()
 
@@ -53,17 +47,14 @@ io.on('connection', socket => {
 
 		if (activeFriendRooms.length > 0) {
 			socket.join(activeFriendRooms)
+
 			activeFriendRooms.forEach(room => {
 				socket.emit('friendOnline', { username: room })
-				socket.broadcast
-					.to(room)
-					.emit('friendOnline', { username: username })
+				socket.broadcast.emit('friendOnline', { username: username })
 			})
 		} else {
 			socket.join(username)
-			socket.broadcast
-				.to(username)
-				.emit('friendOnline', { username: username })
+			socket.broadcast.emit('friendOnline', { username: username })
 		}
 	})
 

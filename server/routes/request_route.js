@@ -140,8 +140,7 @@ router.put('/add', async (req, res) => {
 				friends: {
 					username: sender.username,
 					name: sender.name,
-					msgs: [],
-					onlineStatus: false
+					msgs: []
 				}
 			}
 		})
@@ -160,8 +159,7 @@ router.put('/add', async (req, res) => {
 				friends: {
 					username: receiver.username,
 					name: receiver.name,
-					msgs: [],
-					onlineStatus: false
+					msgs: []
 				}
 			}
 		})
