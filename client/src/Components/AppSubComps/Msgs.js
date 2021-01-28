@@ -8,30 +8,53 @@ let socket
 const Msgs = () => {
 	const ENDPOINT = 'http://localhost:5000/'
 	const username = window.localStorage.getItem('username')
+	const [change, setChange] = useState(0)
 
 	const [
-		friends,
 		getFriends,
-		setFriends,
+		friendsList,
+		userMsgs,
+		setUserMsgs,
+		usersStatus,
+		setUsersStatus,
 		activeUser,
 		setActiveUser
 	] = useContext(UserContext)
 
 	useEffect(() => {
 		socket = io(ENDPOINT)
-		if (friends.length > 0) {
-			console.log(socket)
-			socket.emit(
-				'join',
-				{ username: username, friends: friends },
-				({ error }) => alert(error)
-			)
+		if (friendsList.length > 0 && usersStatus.length > 0) {
+			socket.emit('join', { username: username, friends: friendsList })
 
-			socket.on('online', msg => console.log('o', msg))
-			socket.on('friendOnline', msg => console.log('fo', msg))
-			socket.on('friendDisconnect', msg => console.log('fd', msg))
+			socket.on('friendOnline', msg => {
+				const status = []
+
+				usersStatus.forEach(e => status.push(e))
+				status.forEach(e => {
+					if (msg.username === e.username) {
+						console.log('connect', username)
+						e.status = true
+					}
+				})
+				setUsersStatus(status)
+			})
+
+			socket.on('friendDisconnect', msg => {
+				const status = []
+
+				usersStatus.forEach(e => status.push(e))
+				status.forEach(e => {
+					if (msg.username === e.username) {
+						console.log('disconnect', username)
+						e.status = false
+					}
+				})
+				setUsersStatus(status)
+			})
+		} else {
+			setChange(change + 1)
 		}
-	}, [friends])
+	}, [change])
 
 	return (
 		<div className='msgs'>
