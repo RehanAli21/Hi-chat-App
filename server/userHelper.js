@@ -1,6 +1,4 @@
-const { isError } = require('joi')
-
-const users = []
+let users = []
 
 const getAllRoom = () => {
 	const rooms = []
@@ -26,10 +24,10 @@ const addUser = ({ id, username, room }) => {
 	return { user }
 }
 
-const removeUser = ({ id }) => {
-	const index = users.findIndex(user => user.id === id)
-
-	if (index !== -1) return users.splice(index, 1)[0]
+const removeUser = ({ username }) => {
+	const temp = users.filter(user => user.room === username)
+	users = temp
+	console.log(users)
 }
 
 const getUserById = ({ id }) => users.find(user => user.id === id)
