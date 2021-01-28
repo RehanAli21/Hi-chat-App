@@ -5,9 +5,12 @@ import axios from 'axios'
 
 const Login = ({ changeTheme }) => {
 	const [
-		friends,
 		getFriends,
-		setFriends,
+		friendsList,
+		userMsgs,
+		setUserMsgs,
+		usersStatus,
+		setUsersStatus,
 		activeUser,
 		setActiveUser
 	] = useContext(UserContext)
