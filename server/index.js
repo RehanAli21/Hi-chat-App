@@ -37,10 +37,7 @@ io.on('connection', socket => {
 		if (error) {
 			callback({ error: 'already Online!!!' })
 		} else {
-			socket.emit('online', {
-				username: user.username,
-				text: 'I am Online'
-			})
+			socket.emit('online', { username: user.username })
 		}
 
 		const rooms = getAllRoom()
@@ -54,16 +51,27 @@ io.on('connection', socket => {
 			})
 		})
 
-		socket.join(rooms)
-
-		rooms.forEach(room => {
-			socket.broadcast.to(room).emit('online', {
-				username: room,
-				text: `${room} is online`
+		if (activeFriendRooms.length > 0) {
+			socket.join(activeFriendRooms)
+			activeFriendRooms.forEach(room => {
+				socket.emit('friendOnline', { username: room })
+				socket.broadcast
+					.to(room)
+					.emit('friendOnline', { username: username })
 			})
-		})
+		} else {
+			socket.join(username)
+			socket.broadcast
+				.to(username)
+				.emit('friendOnline', { username: username })
+		}
 	})
-	socket.on('disconnect', () => {})
+
+	socket.on('offline', ({ username }) => {
+		socket.broadcast.emit('friendDisconnect', { username: username })
+
+		removeUser(username)
+	})
 })
 
 //connection to mongodb
