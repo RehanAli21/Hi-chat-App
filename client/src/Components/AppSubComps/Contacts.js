@@ -7,9 +7,12 @@ import FindFriend from './FindFriend'
 
 const Contacts = () => {
 	const [
-		friends,
 		getFriends,
-		setFriends,
+		friendsList,
+		userMsgs,
+		setUserMsgs,
+		usersStatus,
+		setUsersStatus,
 		activeUser,
 		setActiveUser
 	] = useContext(UserContext)
@@ -30,15 +33,26 @@ const Contacts = () => {
 	}
 
 	const showContact = () => {
-		return friends.map(ele => (
-			<Contact
-				key={ele.username}
-				username={ele.username}
-				msg={ele.msgs[0] ? ele.msgs[0] : 'No messages'}
-				onSetActiveUser={onSetActiveUser}
-				onlineStatus={ele.onlineStatus}
-			/>
-		))
+		if (userMsgs.length > 0 && usersStatus.length > 0) {
+			const contactComponents = []
+
+			for (let i = 0; i < friendsList.length; i++) {
+				contactComponents.push(
+					<Contact
+						key={friendsList[i].username}
+						username={friendsList[i].username}
+						msg={
+							userMsgs[i].msgs[0]
+								? userMsgs[i].msgs[0]
+								: 'No messages'
+						}
+						onSetActiveUser={onSetActiveUser}
+						onlineStatus={usersStatus[i].status}
+					/>
+				)
+			}
+			return contactComponents
+		}
 	}
 
 	return (

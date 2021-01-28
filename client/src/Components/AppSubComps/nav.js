@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { UserContext } from './UserContext'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import io from 'socket.io-client'
 
@@ -9,13 +8,6 @@ const Nav = ({ t }) => {
 	const username = window.localStorage.getItem('username')
 	const history = useHistory()
 	const socket = io('http://localhost:5000/')
-	const [
-		friends,
-		getFriends,
-		setFriends,
-		activeUser,
-		setActiveUser
-	] = useContext(UserContext)
 
 	useEffect(() => {
 		changeTheme()
