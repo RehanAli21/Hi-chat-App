@@ -45,17 +45,29 @@ io.on('connection', socket => {
 			})
 		})
 
+		socket.join(username)
 		if (activeFriendRooms.length > 0) {
 			socket.join(activeFriendRooms)
 
 			activeFriendRooms.forEach(room => {
 				socket.emit('friendOnline', { username: room })
-				socket.broadcast.emit('friendOnline', { username: username })
+				socket.broadcast
+					.to(room)
+					.emit('friendOnline', { username: username })
 			})
 		} else {
-			socket.join(username)
 			socket.broadcast.emit('friendOnline', { username: username })
 		}
+	})
+
+	socket.on('message', ({ sender, receiver, msg }) => {
+		const rooms = getAllRoom()
+
+		rooms.forEach(room => {
+			if (room == receiver) {
+				socket.broadcast.to(room).emit('message', { sender, msg })
+			}
+		})
 	})
 
 	socket.on('offline', ({ username }) => {
