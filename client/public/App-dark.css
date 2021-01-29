@@ -139,15 +139,16 @@ main {
 	width: 100%;
 	padding: 15px 0px;
 }
-.contact:active {
+
+.contact-activated {
 	background-color: var(--color);
 	color: white;
 	border-color: white;
 }
-.contact:active p {
+.contact-activated p {
 	color: white;
 }
-.contact:active .contactDetails {
+.contact-activated .contactDetails {
 	border-bottom: 1px solid White;
 }
 

@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react'
 
-const Contact = ({ username, msg, onSetActiveUser, onlineStatus }) => {
-	const [cssClass, setCssClass] = useState({})
+const Contact = ({
+	username,
+	msg,
+	onSetActiveUser,
+	onlineStatus,
+	activeUser
+}) => {
+	const [css, setCss] = useState({})
+	const [contactClass, setContactClass] = useState('contact')
 
 	useEffect(() => {
 		if (onlineStatus) {
-			setCssClass({
+			setCss({
 				width: '12px',
 				height: '12px',
 				backgroundColor: 'green',
@@ -14,7 +21,7 @@ const Contact = ({ username, msg, onSetActiveUser, onlineStatus }) => {
 				margin: '20px 20px 0px 0px'
 			})
 		} else {
-			setCssClass({
+			setCss({
 				width: '12px',
 				height: '12px',
 				backgroundColor: 'red',
@@ -23,11 +30,18 @@ const Contact = ({ username, msg, onSetActiveUser, onlineStatus }) => {
 				margin: '20px 20px 0px 0px'
 			})
 		}
-	}, [onlineStatus])
+		if (activeUser === username) {
+			setContactClass('contact contact-activated')
+		} else {
+			setContactClass('contact')
+		}
+
+		console.log(contactClass, onlineStatus)
+	}, [onlineStatus, activeUser])
 
 	return (
-		<div onClick={() => onSetActiveUser(username)} className='contact'>
-			<div style={cssClass}></div>
+		<div onClick={() => onSetActiveUser(username)} className={contactClass}>
+			<div style={css}></div>
 			<div className='contactDetails'>
 				<h3>{username.toUpperCase()}</h3>
 				<p>{msg}</p>
