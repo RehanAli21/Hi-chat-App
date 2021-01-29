@@ -33,6 +33,8 @@ const Contacts = () => {
 	}
 
 	const showContact = () => {
+		const splitmsg = string => string.split('(|hi_app|)')[1]
+
 		if (userMsgs.length > 0 && usersStatus.length > 0) {
 			const contactComponents = []
 
@@ -43,11 +45,12 @@ const Contacts = () => {
 						username={friendsList[i].username}
 						msg={
 							userMsgs[i].msgs[0]
-								? userMsgs[i].msgs[0]
+								? splitmsg(userMsgs[i].msgs[0])
 								: 'No messages'
 						}
 						onSetActiveUser={onSetActiveUser}
 						onlineStatus={usersStatus[i].status}
+						activeUser={activeUser}
 					/>
 				)
 			}
