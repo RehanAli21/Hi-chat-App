@@ -4,7 +4,6 @@ import axios from 'axios'
 const FindFriend = ({ ff, changeFind }) => {
 	const [input, setInput] = useState('')
 	const [name, setName] = useState('')
-	const [u, setU] = useState('')
 	const [show, setShow] = useState(false)
 	const id = window.localStorage.getItem('id')
 
@@ -18,7 +17,6 @@ const FindFriend = ({ ff, changeFind }) => {
 				)
 					return alert('The searched username is yours')
 				setName(res.data.name ? res.data.name : res.data.msg)
-				setU(res.data.username)
 				setShow(true)
 			})
 			.catch(err => console.error(err))
@@ -55,7 +53,7 @@ const FindFriend = ({ ff, changeFind }) => {
 		axios
 			.put('http://localhost:5000/request/send', {
 				id: id,
-				username: u
+				username: input
 			})
 			.then(res => {
 				alert(res.data.msg)
