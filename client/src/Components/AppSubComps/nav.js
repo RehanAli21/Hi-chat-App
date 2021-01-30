@@ -1,30 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useHistory } from 'react-router-dom'
 import io from 'socket.io-client'
 
-const Nav = ({ t }) => {
-	const [theme, setTheme] = useState(t)
+const Nav = ({ theme, changeTheme }) => {
 	const name = window.localStorage.getItem('name')
 	const username = window.localStorage.getItem('username')
 	const history = useHistory()
 	const socket = io('http://localhost:5000/')
-
-	useEffect(() => {
-		changeTheme()
-	}, [])
 
 	const onSignOut = () => {
 		disconnectFromServer(username)
 
 		window.localStorage.setItem('id', '')
 		window.localStorage.setItem('username', '')
-
-		const link = document.getElementById('styles')
-		if (theme === 'dark') {
-			link.href = 'SignIn-dark.css'
-		} else if (theme === 'white') {
-			link.href = 'SignIn.css'
-		}
 
 		history.push('/')
 	}
@@ -33,17 +21,6 @@ const Nav = ({ t }) => {
 		socket.emit('offline', { username })
 		socket.disconnect()
 		socket.off()
-	}
-
-	const changeTheme = () => {
-		const link = document.getElementById('styles')
-		if (theme === 'white') {
-			link.href = 'App-dark.css'
-			setTheme('dark')
-		} else if (theme === 'dark') {
-			link.href = 'App.css'
-			setTheme('white')
-		}
 	}
 
 	return (

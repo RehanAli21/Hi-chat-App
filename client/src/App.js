@@ -8,20 +8,16 @@ import Forget from './Components/Forget'
 
 class App extends Component {
 	state = {
-		theme: 'white'
-	}
-
-	setUAndId = (username, _id) => {
-		this.setState(prevstate => ({ ...prevstate, u: username, id: _id }))
+		theme: 'dark'
 	}
 
 	changeTheme = () => {
 		const link = document.getElementById('styles')
 		if (this.state.theme === 'white') {
-			link.href = 'SignIn-dark.css'
+			link.href = 'dark.css'
 			this.setState(() => ({ theme: 'dark' }))
 		} else if (this.state.theme === 'dark') {
-			link.href = 'SignIn.css'
+			link.href = 'light.css'
 			this.setState(() => ({ theme: 'white' }))
 		}
 	}
@@ -38,7 +34,12 @@ class App extends Component {
 					<Route
 						path='/app'
 						exact
-						render={() => <MainApp theme={this.state.theme} />}
+						render={() => (
+							<MainApp
+								theme={this.state.theme}
+								changeTheme={this.changeTheme}
+							/>
+						)}
 					/>
 				</UserProvider>
 				<Route

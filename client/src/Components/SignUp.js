@@ -48,6 +48,7 @@ const SignUp = ({ changeTheme }) => {
 						name='fullname'
 						id='fullname'
 						placeholder='Full Name...'
+						className='none-app-input'
 						onChange={e => setName(e.target.value)}
 					/>
 				</div>
@@ -57,6 +58,7 @@ const SignUp = ({ changeTheme }) => {
 						name='username'
 						id='username'
 						placeholder='Username...'
+						className='none-app-input'
 						onChange={e => setUsername(e.target.value)}
 					/>
 				</div>
@@ -66,6 +68,7 @@ const SignUp = ({ changeTheme }) => {
 						name='password'
 						id='password'
 						placeholder='Password...'
+						className='none-app-input'
 						onChange={e => setPassword(e.target.value)}
 					/>
 				</div>
@@ -75,6 +78,7 @@ const SignUp = ({ changeTheme }) => {
 						name='con-password'
 						id='con-password'
 						placeholder='Confirm Password...'
+						className='none-app-input'
 						onChange={e => setConPassword(e.target.value)}
 					/>
 				</div>
@@ -84,6 +88,7 @@ const SignUp = ({ changeTheme }) => {
 						name='recovery-text'
 						id='recovery-text'
 						placeholder='Text for recovery of password...'
+						className='none-app-input'
 						onChange={e => setRecover(e.target.value)}
 					/>
 				</div>

@@ -8,11 +8,145 @@ body {
 }
 
 * {
-	padding: 0;
 	margin: 0;
+	padding: 0;
 	box-sizing: border-box;
 	font-family: sans-serif;
 }
+
+.blue {
+	text-decoration: none;
+}
+
+.container {
+	width: 70%;
+	text-align: center;
+	margin-left: 15%;
+	margin-top: 4em;
+	font-family: sans-serif;
+}
+
+.innerContainer {
+	width: 100%;
+}
+
+.heading {
+	margin-bottom: 1em;
+	color: White;
+}
+
+hr {
+	border: 1px solid var(--color);
+	margin-bottom: 2em;
+	width: 66%;
+	margin-left: 18%;
+}
+
+.innerContainer div {
+	margin: 2em 0;
+}
+
+.none-app-input {
+	padding: 12px 15px;
+	width: 50%;
+	border: 1px solid var(--color);
+	border-bottom: 2px solid var(--color);
+	outline: none;
+	border-radius: 5px;
+	font-size: 1em;
+}
+
+.none-app-input:focus {
+	border: 1px solid var(--color);
+	border-bottom: 3px solid var(--color);
+}
+
+::placeholder {
+	color: #cccccc;
+}
+
+.links {
+	font-size: 0.9em;
+}
+.links p {
+	display: inline;
+	margin-left: 30px;
+	color: white;
+}
+
+.btn-theme {
+	color: white;
+	border: 1px solid var(--color);
+	background-color: var(--darkcolor);
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.btn-theme:active {
+	background-color: var(--color);
+	color: var(--darkcolor);
+}
+
+.btn-primary {
+	color: white;
+	border: 1px solid var(--darkcolor);
+	background-color: var(--color);
+}
+
+.btn-primary:focus {
+	border: 2px solid white;
+}
+
+.btn-primary:active {
+	background-color: var(--color);
+	transform: scale(0.9);
+}
+
+.btn {
+	padding: 12px;
+	font-size: 1em;
+	font-weight: bold;
+	border-radius: 10px;
+	outline: none;
+}
+
+@media screen and (max-width: 992px) {
+	.container {
+		width: 100%;
+		margin-left: 0;
+	}
+
+	hr {
+		width: 90%;
+		margin-left: 5%;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.container {
+		width: 100%;
+		margin-left: 0;
+	}
+
+	hr {
+		width: 90%;
+		margin-left: 5%;
+	}
+}
+
+@media screen and (max-width: 720px) {
+	.container {
+		width: 100%;
+		margin-left: 0;
+	}
+
+	hr {
+		width: 90%;
+		margin-left: 5%;
+	}
+}
+
+/******App css*****/
 
 nav {
 	height: 10vh;
@@ -143,11 +277,11 @@ main {
 
 .contact-activated {
 	background-color: var(--color);
-	color: white;
+	color: white !important;
 	border-color: white;
 }
 .contact-activated p {
-	color: white;
+	color: white !important;
 }
 .contact-activated .contactDetails {
 	border-bottom: 1px solid White;
@@ -225,47 +359,22 @@ main {
 }
 
 .mymsg {
-	background-color: var(--darkcolor);
-	padding: 30px;
-	box-shadow: -2px 2px 5px var(--color);
+	background-color: var(--color);
+	padding: 15px 20px;
 	color: white;
 	max-width: 50%;
-	text-align: center;
-	border: 2px solid var(--color);
+	text-align: right;
+	border-radius: 5px;
 }
 
 .notmymsg {
-	background-color: var(--darkcolor);
-	padding: 30px;
-	border: 2px solid white;
-	box-shadow: 2px 2px 5px white;
-	max-width: 50%;
-	text-align: center;
-	color: white;
-}
-
-.btn {
-	padding: 12px;
-	font-size: 1em;
-	font-weight: bold;
-	border-radius: 10px;
-	outline: none;
-}
-
-.btn-primary {
-	color: white;
-	border: 1px solid var(--darkcolor);
-	background-color: var(--color);
-}
-
-.btn-primary:focus {
-	border: 2px solid white;
-}
-
-.btn-primary:active {
-	background-color: var(--darkcolor);
+	background-color: white;
 	color: var(--color);
-	transform: scale(0.9);
+	padding: 15px 20px;
+	max-width: 50%;
+	text-align: left;
+	color: var(--darkcolor);
+	border-radius: 5px;
 }
 
 input {

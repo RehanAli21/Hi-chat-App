@@ -44,6 +44,7 @@ const Forget = () => {
 					type='text'
 					name='username'
 					placeholder='Enter Username...'
+					className='none-app-input'
 					onChange={e => setUsername(e.target.value)}
 				/>
 			</div>
@@ -53,6 +54,7 @@ const Forget = () => {
 					type='text'
 					name='recover'
 					placeholder='Enter Recover Text...'
+					className='none-app-input'
 					onChange={e => setRecover(e.target.value)}
 				/>
 			</div>
@@ -62,6 +64,7 @@ const Forget = () => {
 					type='text'
 					name='password'
 					placeholder='New Password...'
+					className='none-app-input'
 					onChange={e => setPassword(e.target.value)}
 				/>
 			</div>
@@ -71,6 +74,7 @@ const Forget = () => {
 					type='text'
 					name='conpassword'
 					placeholder='Confirm Password...'
+					className='none-app-input'
 					onChange={e => setConpassword(e.target.value)}
 				/>
 			</div>

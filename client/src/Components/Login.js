@@ -51,6 +51,7 @@ const Login = ({ changeTheme }) => {
 						name='username'
 						id='username'
 						placeholder='Username...'
+						className='none-app-input'
 						onChange={e => setUsername(e.target.value)}
 					/>
 				</div>
@@ -60,6 +61,7 @@ const Login = ({ changeTheme }) => {
 						name='password'
 						id='password'
 						placeholder='Password...'
+						className='none-app-input'
 						onChange={e => setPassword(e.target.value)}
 					/>
 				</div>
