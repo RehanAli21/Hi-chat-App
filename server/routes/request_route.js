@@ -80,10 +80,11 @@ router.put('/send', async (req, res) => {
 		if (alreadyFriend) return res.send({ msg: 'Already added as friend' })
 
 		//checking if user already sended the request
-		const alreadyReqSended = currentUser.request_sended.find(
-			req => req.username === req.body.username
-		)
-		if (alreadyReqSended) return res.send({ msg: 'Request Already Sended' })
+		currentUser.request_sended.forEach(request => {
+			if (request.username === req.body.username) {
+				return res.send({ msg: 'Request Already Sended' })
+			}
+		})
 
 		//adding the request into current user data,
 		//so the request can't be sended again
