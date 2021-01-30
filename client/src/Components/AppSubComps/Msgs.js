@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
+import axios from 'axios'
 import ScrollToBottom from 'react-scroll-to-bottom'
 import { UserContext } from './UserContext'
 import io from 'socket.io-client'
@@ -32,29 +33,12 @@ const Msgs = () => {
 
 			//////For FriendOnline//////
 			socket.on('friendOnline', msg => {
-				const status = []
-
-				usersStatus.forEach(e => status.push(e))
-				status.forEach(e => {
-					if (msg.username === e.username) {
-						console.log('connect', username)
-						e.status = true
-					}
-				})
-				setUsersStatus(status)
+				setUserStatusOnSocket(msg.username, true)
 			})
 
 			//////For FriendDisconnect//////
 			socket.on('friendDisconnect', msg => {
-				const status = []
-
-				usersStatus.forEach(e => status.push(e))
-				status.forEach(e => {
-					if (msg.username === e.username) {
-						e.status = false
-					}
-				})
-				setUsersStatus(status)
+				setUserStatusOnSocket(msg.username, false)
 			})
 
 			//////For Receiving Msg//////
@@ -73,19 +57,20 @@ const Msgs = () => {
 					}
 				}
 				setUserMsgs(newUserMsgs)
+
+				setUserStatusOnSocket(data.sender, true)
 			})
 		} else if (change < 20) {
 			setChange(change + 1)
 		}
 
 		return () => {
-			socket.emit('offline', { username })
 			socket.disconnect()
 			socket.off()
 		}
-	}, [change, friendsList, username])
+	}, [change, friendsList])
 
-	const sendMsg = () => {
+	const sendMsg = async () => {
 		if (msg !== '' && activeUser !== '') {
 			socket.emit('message', {
 				sender: username,
@@ -93,19 +78,45 @@ const Msgs = () => {
 				msg
 			})
 
+			const Encryptmsg = username + '(|hi_app|)' + msg
+
 			const newUserMsgs = []
 			for (let i = 0; i < userMsgs.length; i++) {
 				newUserMsgs.push(userMsgs[i])
 			}
 			for (let i = 0; i < newUserMsgs.length; i++) {
 				if (newUserMsgs[i].username === activeUser) {
-					newUserMsgs[i].msgs.push('' + username + '(|hi_app|)' + msg)
+					newUserMsgs[i].msgs.push(Encryptmsg)
 				}
+			}
+
+			try {
+				const res = await axios.post(`${ENDPOINT}msg/`, {
+					sender: username,
+					receiver: activeUser,
+					msg: Encryptmsg
+				})
+
+				console.log(res)
+			} catch (error) {
+				console.log('error on saving msg')
 			}
 
 			setUserMsgs(newUserMsgs)
 			document.getElementById('msgInput').value = ''
 		}
+	}
+
+	const setUserStatusOnSocket = (username, online) => {
+		const status = []
+
+		usersStatus.forEach(e => status.push(e))
+		status.forEach(e => {
+			if (username === e.username) {
+				e.status = online
+			}
+		})
+		setUsersStatus(status)
 	}
 
 	const shoWMsgs = () => {
