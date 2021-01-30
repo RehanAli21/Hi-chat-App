@@ -80,6 +80,7 @@ main {
 	padding: 20px;
 	margin-left: 25%;
 	color: white;
+	z-index: 5;
 }
 
 .ffd .one div,

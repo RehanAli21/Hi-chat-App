@@ -35,8 +35,6 @@ const Contact = ({
 		} else {
 			setContactClass('contact')
 		}
-
-		console.log(contactClass, onlineStatus)
 	}, [onlineStatus, activeUser])
 
 	return (
