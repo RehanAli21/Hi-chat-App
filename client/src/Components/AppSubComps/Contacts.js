@@ -43,6 +43,7 @@ const Contacts = () => {
 					<Contact
 						key={friendsList[i].username}
 						username={friendsList[i].username}
+						name={friendsList[i].name}
 						msg={
 							userMsgs[i].msgs[0]
 								? splitmsg(userMsgs[i].msgs[0])

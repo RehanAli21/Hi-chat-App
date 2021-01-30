@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 const Contact = ({
 	username,
+	name,
 	msg,
 	onSetActiveUser,
 	onlineStatus,
@@ -41,7 +42,7 @@ const Contact = ({
 		<div onClick={() => onSetActiveUser(username)} className={contactClass}>
 			<div style={css}></div>
 			<div className='contactDetails'>
-				<h3>{username.toUpperCase()}</h3>
+				<h3>{name.toUpperCase()}</h3>
 				<p>{msg}</p>
 			</div>
 		</div>
