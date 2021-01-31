@@ -2,16 +2,20 @@ const router = require('express').Router()
 const UserModel = require('../model/UserModel')
 const Joi = require('joi')
 
+//This route return user, if present in DB
 router.get('/:username/:password', async (req, res) => {
 	try {
+		//finding user by username and password
 		const user = await UserModel.findOne({
 			username: req.params.username,
 			password: req.params.password
 		})
+		//if user not found return error
 		if (!user) {
-			res.status(400).send('Username or Password is incorrect')
+			res.send({ msg: 'Username or Password is incorrect' })
 			return
 		}
+		//if user found, return id, username, name
 		res.status(200).send({
 			id: user._id,
 			name: user.name,
@@ -22,8 +26,12 @@ router.get('/:username/:password', async (req, res) => {
 	}
 })
 
+//This route is for updating password,
+//password is lost
 router.put('/forget', async (req, res) => {
 	try {
+		//finding user by username and recover text,
+		//then updates the password
 		const user = await UserModel.findOneAndUpdate(
 			{
 				username: req.body.username,
@@ -31,12 +39,15 @@ router.put('/forget', async (req, res) => {
 			},
 			{ password: req.body.password }
 		)
-		if (!user) return res.status(400).send({ msg: 'Username is incorrect' })
+
+		//if user not found return error
+		if (!user) return res.send({ msg: 'Username is incorrect' })
 
 		res.status(200).send({ msg: 'Password Updated' })
 	} catch (error) {}
 })
 
+//This route is for adding user
 router.post('/', async (req, res) => {
 	//Validation
 	const schema = Joi.object({
@@ -53,6 +64,7 @@ router.post('/', async (req, res) => {
 		return
 	}
 
+	//initailizing new UserModel for inserting in DB
 	const user = new UserModel({
 		name: req.body.name,
 		username: req.body.username,
@@ -61,10 +73,11 @@ router.post('/', async (req, res) => {
 	})
 
 	try {
+		//Saving the user into DB
 		await user.save()
 		res.status(200).send({ msg: 'User added!' })
 	} catch (err) {
-		res.status(400).send({
+		res.send({
 			msg: err.code == 11000 ? 'This username already exits' : 'Error'
 		})
 	}
