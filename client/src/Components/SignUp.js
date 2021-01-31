@@ -19,7 +19,7 @@ const SignUp = ({ changeTheme }) => {
 			return alert('password and confirm passsword is not same')
 
 		axios
-			.post('http://localhost:5000/user', {
+			.post('https://hi-chat-application.herokuapp.com/user', {
 				name,
 				username,
 				password,

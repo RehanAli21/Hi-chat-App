@@ -17,14 +17,14 @@ const Login = ({ changeTheme }) => {
 
 	let [username, setUsername] = useState('')
 	let [password, setPassword] = useState('')
-	const ENDPOINT = 'http://localhost:5000'
+	const ENDPOINT = 'https://hi-chat-application.herokuapp.com/'
 	let history = useHistory()
 
 	const onLogin = () => {
 		if (!username && !password) return
 
 		axios
-			.get(`${ENDPOINT}/user/${username}/${password}`)
+			.get(`${ENDPOINT}user/${username}/${password}`)
 			.then(res => {
 				if (res.status === 200) {
 					window.localStorage.setItem('username', res.data.username)
