@@ -39,8 +39,12 @@ const addUser = ({ id, username, room }) => {
 const removeUser = ({ username }) => {
 	//filter/removing the user from users array,
 	//whose username is save as user room (because rooms and username are same)
-	const temp = users.filter(user => user.room === username)
-
+	const temp = []
+	users.forEach(user => {
+		if (user.room !== username) {
+			temp.push(user)
+		}
+	})
 	//then access the temp array into users array
 	users = temp
 }

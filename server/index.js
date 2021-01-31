@@ -35,7 +35,6 @@ server.listen(port, () => console.log(`${port}`))
 
 //This is for connecting User to Front-End
 io.on('connection', socket => {
-	console.log(getAllRoom())
 	//This event runs when user emit join event on Front-End
 	socket.on('join', ({ username, friends }) => {
 		//Adding user into users array, which tracks which users are connected
