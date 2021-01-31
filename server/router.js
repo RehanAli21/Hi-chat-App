@@ -10,8 +10,9 @@ router.use('/friend', friendroute)
 router.use('/request', reqroute)
 router.use('/msg', msgroute)
 
+//To show that server is running
 router.get('/', (req, res) => {
-	res.send('Hello you are on home')
+	res.send('Server is Running!!')
 })
 
 module.exports = router
