@@ -46,7 +46,11 @@ const Contacts = () => {
 						name={friendsList[i].name}
 						msg={
 							userMsgs[i].msgs[0]
-								? splitmsg(userMsgs[i].msgs[0])
+								? splitmsg(
+										userMsgs[i].msgs[
+											userMsgs[i].msgs.length - 1
+										]
+								  )
 								: 'No messages'
 						}
 						onSetActiveUser={onSetActiveUser}
