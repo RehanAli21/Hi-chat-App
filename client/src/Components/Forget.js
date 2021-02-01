@@ -18,7 +18,7 @@ const Forget = () => {
 			return alert('Password and confirm password is not same!')
 
 		axios
-			.put('https://hi-chat-application.herokuapp.com/user/forget', {
+			.put('http://localhost:5000/user/forget', {
 				username,
 				recover,
 				password

@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react'
+import axios from 'axios'
 import { UserContext } from './AppSubComps/UserContext'
 import { Link } from 'react-router-dom'
 
@@ -14,16 +15,24 @@ const Login = ({ changeTheme }) => {
 		setActiveUser
 	] = useContext(UserContext)
 
-	let [username, setUsername] = useState('')
-<<<<<<< HEAD
-=======
-	let [password, setPassword] = useState('')
-	const ENDPOINT = 'https://hi-chat-application.herokuapp.com/'
-	let history = useHistory()
->>>>>>> parent of d81751e (Removing database features.)
+	const [username, setUsername] = useState('')
+	const [password, setPassword] = useState('')
 
 	const onLogin = () => {
-		if (!username) return
+		if (!username && !password) return
+
+		axios
+			.get(`${ENDPOINT}/user/${username}/${password}`)
+			.then(res => {
+				if (res.status === 200) {
+					window.localStorage.setItem('username', res.data.username)
+					window.localStorage.setItem('id', res.data.id)
+					window.localStorage.setItem('name', res.data.name)
+					getFriends(res.data.id)
+					history.push('/app')
+				}
+			})
+			.catch(err => alert('Username or password is incorrent'))
 	}
 
 	return (

@@ -11,9 +11,7 @@ export const UserProvider = props => {
 
 	const getFriends = async id => {
 		try {
-			const res = await axios.get(
-				`https://hi-chat-application.herokuapp.com/friend/${id}`
-			)
+			const res = await axios.get(`http://localhost:5000/friend/${id}`)
 			const friendList = []
 			const usernamesAndMsgs = []
 			const usernameAndStatus = []
