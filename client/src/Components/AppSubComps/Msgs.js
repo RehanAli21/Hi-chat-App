@@ -8,7 +8,7 @@ import Msg from './Msg'
 let socket
 
 const Msgs = () => {
-	const ENDPOINT = 'http://localhost:5000/'
+	const ENDPOINT = 'https://hi-chat-application.herokuapp.com/'
 	const username = window.localStorage.getItem('username')
 	const [change, setChange] = useState(0)
 	const [msg, setMsg] = useState('')

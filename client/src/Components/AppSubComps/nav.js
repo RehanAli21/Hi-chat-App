@@ -6,7 +6,7 @@ const Nav = ({ theme, changeTheme }) => {
 	const name = window.localStorage.getItem('name')
 	const username = window.localStorage.getItem('username')
 	const history = useHistory()
-	const socket = io('http://localhost:5000/')
+	const socket = io('https://hi-chat-application.herokuapp.com/')
 
 	const onSignOut = () => {
 		disconnectFromServer(username)

@@ -15,6 +15,12 @@ const Login = ({ changeTheme }) => {
 	] = useContext(UserContext)
 
 	let [username, setUsername] = useState('')
+<<<<<<< HEAD
+=======
+	let [password, setPassword] = useState('')
+	const ENDPOINT = 'https://hi-chat-application.herokuapp.com/'
+	let history = useHistory()
+>>>>>>> parent of d81751e (Removing database features.)
 
 	const onLogin = () => {
 		if (!username) return

@@ -9,7 +9,7 @@ const FindFriend = ({ ff, changeFind }) => {
 
 	const onSearch = () => {
 		axios
-			.get(`http://localhost:5000/request/${input}`)
+			.get(`https://hi-chat-application.herokuapp.com/request/${input}`)
 			.then(res => {
 				if (
 					res.data.username ===
@@ -51,7 +51,7 @@ const FindFriend = ({ ff, changeFind }) => {
 
 	const sendRequest = () => {
 		axios
-			.put('http://localhost:5000/request/send', {
+			.put('https://hi-chat-application.herokuapp.com/request/send', {
 				id: id,
 				username: input
 			})

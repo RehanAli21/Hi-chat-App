@@ -1,6 +1,9 @@
+const mongoose = require('mongoose')
 const express = require('express')
+const dotenv = require('dotenv')
 const http = require('http')
 const app = express()
+const cors = require('cors')
 const { addUser, removeUser, getAllRoom } = require('./userHelper')
 dotenv.config()
 
@@ -11,6 +14,21 @@ const io = require('socket.io')(server, {
 		methods: ['GET', 'POST']
 	}
 })
+
+const router = require('./router')
+
+//middlewares
+app.use(express.json())
+app.use(cors())
+app.use(router)
+
+//connection to mongodb
+//'mongodb://localhost:27017/Hi'
+mongoose.set('useUnifiedTopology', true)
+mongoose.set('useCreateIndex', true)
+mongoose.connect(process.env.Hi_app_DB, { useNewUrlParser: true }, () =>
+	console.log('Mongodb Connected')
+)
 
 const port = process.env.PORT || 5000
 server.listen(port, () => console.log(`${port}`))
