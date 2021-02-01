@@ -12,16 +12,14 @@ const Request = ({ req, changeReq }) => {
 		const id = window.localStorage.getItem('id')
 
 		axios
-			.get(
-				`https://hi-chat-application.herokuapp.com/request/received/${id}`
-			)
+			.get(`http://localhost:5000/request/received/${id}`)
 			.then(res => setReceived_reqs(res.data.request_received))
 			.catch(err => console.error(err))
 	}
 
 	const acceptReq = username => {
 		axios
-			.put(`https://hi-chat-application.herokuapp.com/request/add`, {
+			.put(`http://localhost:5000/request/add`, {
 				id: window.localStorage.getItem('id'),
 				username: username
 			})
@@ -34,7 +32,7 @@ const Request = ({ req, changeReq }) => {
 
 	const rejectReq = username => {
 		axios
-			.put(`https://hi-chat-application.herokuapp.com/request/remove`, {
+			.put(`http://localhost:5000/request/remove`, {
 				id: window.localStorage.getItem('id'),
 				username: username
 			})
